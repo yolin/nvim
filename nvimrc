@@ -297,7 +297,7 @@ noremap <F5> <esc>:Gtrans<cr>
 noremap <F6> <esc>:Reddit worldnews<cr>
 noremap <F7> <esc>:Reddit taiwan<cr>
 noremap <F8> <esc>:BufExplorer<cr>
-noremap <F9> <esc>:!gencs.sh <c-r>=getcwd()<cr>
+noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
 noremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
 noremap <F12> <esc>:call ReloadAllCSCOPE("<c-r>=getcwd()<cr>")
@@ -314,7 +314,7 @@ inoremap <F5> <esc>:Gtrans<cr>
 inoremap <F6> <esc>:Reddit worldnews<cr>
 inoremap <F7> <esc>:Reddit taiwan<cr>
 inoremap <F8> <esc>:BufExplorer<cr>
-inoremap <F9> <esc>:!gencs.sh <c-r>=getcwd()<cr>
+inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
 inoremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
 inoremap <F12> <esc>:call ReloadAllCSCOPE("<c-r>=getcwd()<cr>")

@@ -1,24 +1,29 @@
 #!/bin/bash
-defaultCodeBaseName="/ISD2"
-if [ "$1" != "" ]; then
-    defaultCodeBaseName="$1"
-fi
+defaultCodeBaseName=${1:-/ISD2}
+defaultDepth=${2:-1}
 
-genfolder=`find $defaultCodeBaseName \-maxdepth 1 \-type d |grep -v "^$defaultCodeBaseName/\.git$\|^$defaultCodeBaseName/crosslibs$\|^$defaultCodeBaseName$\|^$defaultCodeBaseName/TARGET_RAMDISK$"|grep -v "dir/toolchain-"`
+if [ "$1" = "" -o "$2" != "" ]; then
+    genfolder=`find $defaultCodeBaseName \-maxdepth $defaultDepth \-type d |grep -v "^$defaultCodeBaseName/\.git$\|^$defaultCodeBaseName/crosslibs$\|^$defaultCodeBaseName$\|^$defaultCodeBaseName/TARGET_RAMDISK$"|grep -v "dir/toolchain-"`
+else
+    genfolder=$1
+fi
 
 echo "CodeBase:$defaultCodeBaseName"
 echo "Folder:$genfolder"
 
 exgentype=`printf '\-name "*.c" "*.h" "Makefile*" "*.cpp"' | sed 's/" /" -or -name /g'`
 
+CSCOPE_DIR=~/CSCOPE
 echo "--------Start Scanning---------"
 for d in $genfolder
 do
+    echo "remove $CSCOPE_DIR/$d/ subdirs"
+    find $CSCOPE_DIR/$d/ \-type d |xargs rm -rf
     echo "Scanning... $d"
-    mkdir -p /CSCOPE/$d
-    eval "find $d -type f -and \\( $exgentype \\) > /CSCOPE/$d/cscope.files"
-    sed -i -e 's/^/"/g' /CSCOPE/$d/cscope.files
-    sed -i -e 's/$/"/g' /CSCOPE/$d/cscope.files
-    cscope -bkq -i /CSCOPE/$d/cscope.files -f /CSCOPE/$d/cscope.out
+    mkdir -p $CSCOPE_DIR/$d
+    eval "find $d -type f -and \\( $exgentype \\) > $CSCOPE_DIR/$d/cscope.files"
+    sed -i -e 's/^/"/g' $CSCOPE_DIR/$d/cscope.files
+    sed -i -e 's/$/"/g' $CSCOPE_DIR/$d/cscope.files
+    cscope -bkq -i $CSCOPE_DIR/$d/cscope.files -f $CSCOPE_DIR/$d/cscope.out
 done
 echo "--------Finish Scanning---------"
