@@ -66,7 +66,7 @@ let g:gtrans_DefaultLang = 'tw'
 let g:gtrans_Engine = 'google' " 或者 bing
 
 " set leader to ,
-let mapleader=","
+"let mapleader=","
 let g:mapleader=","
 
 " general
@@ -253,7 +253,7 @@ set winaltkeys=no
 
 nnoremap <space><space> :noh<cr>:call MySwitchToWorkBuf()<cr>
 
-nnoremap `<esc> :q<cr>
+nnoremap `<esc> :qa<cr>
 
 
 noremap <leader><xF1> <esc>:NERDTreeFind<cr>
@@ -293,8 +293,8 @@ inoremap <F12> <esc>:call ReloadCSCOPE("<c-r>=getcwd()<cr>")
 vnoremap <xF3> y<esc>:Ag "<c-r>0" <c-r>=getcwd()<cr>
 
 
-noremap <leader>/ <esc>:noh<cr>
-noremap <leader>t <esc>:Gtrans<cr>
+"noremap <leader>/ <esc>:noh<cr>
+"noremap <leader>t <esc>:Gtrans<cr>
 
 noremap <c-j> :GitGutterNextHunk<cr>
 noremap <c-k> :GitGutterPrevHunk<cr>
@@ -344,8 +344,8 @@ inoremap <c-v> <c-r>+
 inoremap <c-s> <ESC>:update<cr>
 nnoremap <c-s> :update<cr>
 "nnoremap <leader><space> <ESC>:redraw!<cr>
-"nnoremap <leader>q <ESC>:q<cr>
-"nnoremap <leader>aq <ESC>:qa<cr>
+nnoremap <leader>q <ESC>:q<cr>
+nnoremap <leader>aq <ESC>:qa<cr>
 
 "au Filetype html,htm,xml,xsl source ~/.nvim/scripts/closetag.vim
 "autocmd VimEnter * source ~/.nvim/Session.vim 
@@ -386,24 +386,23 @@ function! ReloadCSCOPE(var)
     set csto=0
     set nocsverb
     let i = 1
-    while i < 15
-        if filereadable("cscope.out")
-            let db = a:var . "/cscope.out"
-            let $CSCOPE_DB = db
-            cs add $CSCOPE_DB
-            let i = 15
-        else
-            let db = g:myGenCSCOPE_DB. a:var ."/cscope.out"
-            if filereadable(expand(db))
-                let $CSCOPE_DB = db
-                cs add $CSCOPE_DB
+    if filereadable("cscope.out")
+        let db = a:var . "/cscope.out"
+        execute "silent! cs add "db
+    else
+        let db = g:myGenCSCOPE_DB . a:var
+        execute "!mkdir -p "db
+        while i < 15
+            if filereadable(expand(db . "/cscope.out"))
+                execute "silent! cs add "db
                 let i = 15
             else
+                let db = db . "/.."
                 cd ..
                 let i += 1
             endif
-        endif
-    endwhile
+        endwhile
+    endif
     cs show
 endfunction
 
