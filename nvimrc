@@ -47,46 +47,15 @@ Bundle 'frankmorris/gtrans.vim-1'
 Bundle 'kdurant/LanguageRefVim'
 Bundle 'tpope/vim-surround'
 Bundle 'bling/vim-airline'
-Bundle 'vim-scripts/L9'
-Bundle 'ervandew/supertab'
+"Bundle 'vim-scripts/L9'
+"Bundle 'ervandew/supertab'
 Bundle 'rking/ag.vim'
-
 Bundle 'justinmk/vim-syntax-extra'
 
-Bundle 'kien/rainbow_parentheses.vim'
 
 "Note
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-notes'
-
-
-"rainbow
-let g:rbpt_colorpairs = [
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ]
-
-"    \ ['darkred',     'DarkOrchid3'],
-"    \ ['red',         'firebrick3'],
-"
-let g:rbpt_max = 15
-let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
 
 "ag setting
 let g:agprg="/usr/bin/ag --column"
@@ -132,26 +101,27 @@ set background=dark
 
 set autoread " auto read when file is changed from outside
 set history=50 " keep 50 lines of command line history
-set mouse=a " mouse support
-if has("gui_running")
-  if has("gui_gtk2")
-    set guifont=Inconsolata\ 16
-  elseif has("gui_macvim")
-    set guifont=Menlo\ Regular:h16
-  elseif has("gui_win32")
-    set guifont=Consolas:h13:cANSI
-  endif
-  set t_Co=256 " 256 color mode
-endif
-if has("gui_macvim") " macvim shift movement
-  let macvim_hig_shift_movement = 1
-endif
+"set mouse=a " mouse support
+"if has("gui_running")
+"  if has("gui_gtk2")
+"    set guifont=Inconsolata\ 16
+"  elseif has("gui_macvim")
+"    set guifont=Menlo\ Regular:h16
+"  elseif has("gui_win32")
+"    set guifont=Consolas:h13:cANSI
+"  endif
+"  set t_Co=256 " 256 color mode
+"endif
+"if has("gui_macvim") " macvim shift movement
+"  let macvim_hig_shift_movement = 1
+"endif
 set cursorline " highlight current line
-set clipboard=unnamed " yank to the system register (*) by default
+set clipboard=unnamed " use +
+"set clipboard+=unnamedplus "use *
 set showmatch " Cursor shows matching ) and }
 set showmode " Show current mode
 " disable sound on errors
-set noeb vb t_vb=
+"set noeb vb t_vb=
 
 " add spell checking and automatic wrapping at the
 " recommended 72 columns to you commit messages
@@ -198,7 +168,7 @@ set ruler
 set tags=tags;
 set write
 set cmdheight=1
-set t_Co=256
+"set t_Co=256
 set backspace=2
 set ls=2
 set magic "can change buffer not save
@@ -290,37 +260,37 @@ noremap <leader><xF1> <esc>:NERDTreeFind<cr>
 noremap <xF1> <esc>:NERDTreeToggle<cr>
 noremap <xF2> <esc>:TagbarToggle<cr>:call MySwitchToWorkBuf()<cr>
 "noremap <xF3> <esc>:!grep --color -irsnI <c-r>+ <c-r>=getcwd()<cr>
-noremap <xF3> <esc>:Ag <c-r>+ <c-r>=getcwd()<cr>
+noremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 "noremap <F4> <esc>:set noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
 noremap <F4> <esc>:set expandtab!<cr>
 noremap <F5> <esc>:Gtrans<cr>
 noremap <F6> <esc>:Reddit worldnews<cr>
 noremap <F7> <esc>:Reddit taiwan<cr>
 noremap <F8> <esc>:BufExplorer<cr>
-noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
+noremap <F9> <esc>:!~/.nvimrc/gencs.sh <c-r>=getcwd()<cr>
 noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
 noremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
-noremap <F12> <esc>:call ReloadAllCSCOPE("<c-r>=getcwd()<cr>")
+noremap <F12> <esc>:call ReloadCSCOPE("<c-r>=getcwd()<cr>")
 
 
 inoremap <xF1> <esc>:call MySwitchToWorkBuf()<cr>:NERDTreeToggle<cr>
 inoremap <leader><c-xF1> <esc>:NERDTreeFind<cr>
 inoremap <xF2> <esc>:call MySwitchToWorkBuf()<cr>:TagbarToggle<cr>
 "inoremap <xF3> <esc>:!grep -irsnI --color <c-r>+ <c-r>=getcwd()<cr>
-inoremap <xF3> <esc>:Ag <c-r>+ <c-r>=getcwd()<cr>
+inoremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 "inoremap <F4> <esc>:set noexpandtab softtabstop=8 shiftwidth=8 tabstop=4
 inoremap <F4> <esc>:set expandtab!<cr>
 inoremap <F5> <esc>:Gtrans<cr>
 inoremap <F6> <esc>:Reddit worldnews<cr>
 inoremap <F7> <esc>:Reddit taiwan<cr>
 inoremap <F8> <esc>:BufExplorer<cr>
-inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
+inoremap <F9> <esc>:!~/.nvimrc/gencs.sh <c-r>=getcwd()<cr>
 inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
 inoremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
-inoremap <F12> <esc>:call ReloadAllCSCOPE("<c-r>=getcwd()<cr>")
+inoremap <F12> <esc>:call ReloadCSCOPE("<c-r>=getcwd()<cr>")
 
 "vnoremap <xF3> y<esc>:!grep -irsnI --color <c-r>0 <c-r>=getcwd()<cr>
-vnoremap <xF3> y<esc>:Ag <c-r>0 <c-r>=getcwd()<cr>
+vnoremap <xF3> y<esc>:Ag "<c-r>0" <c-r>=getcwd()<cr>
 
 
 noremap <leader>/ <esc>:noh<cr>
@@ -365,14 +335,17 @@ inoremap <m-xRight> <esc>:vertical res +3<cr>
 vnoremap <c-x> "+x
 vnoremap <c-c> "+y
 vnoremap <c-v> "+p
+"vnoremap <c-x> "*x
+"vnoremap <c-c> "*y
+"vnoremap <c-v> "*p
 inoremap <c-z> <esc>ui
-inoremap <c-v> <space><esc>:set paste<cr>i<del><c-r>+<esc>:set nopaste<cr>a
+inoremap <c-v> <c-r>+
 "nnoremap <leader>u <ESC>:silent! !~/.nvim/gentag.sh <c-r>=getcwd()<cr> &<cr>
 inoremap <c-s> <ESC>:update<cr>
 nnoremap <c-s> :update<cr>
-nnoremap <leader><space> <ESC>:redraw!<cr>
-nnoremap <leader>q <ESC>:q<cr>
-nnoremap <leader>aq <ESC>:qa<cr>
+"nnoremap <leader><space> <ESC>:redraw!<cr>
+"nnoremap <leader>q <ESC>:q<cr>
+"nnoremap <leader>aq <ESC>:qa<cr>
 
 "au Filetype html,htm,xml,xsl source ~/.nvim/scripts/closetag.vim
 "autocmd VimEnter * source ~/.nvim/Session.vim 
@@ -407,7 +380,7 @@ function! ReloadAllCSCOPE(var)
     "cs show
 endfunction
 
-function! ReloadCSCOPE()
+function! ReloadCSCOPE(var)
     silent! cs kill -1
     set cscopetag
     set csto=0
@@ -415,12 +388,12 @@ function! ReloadCSCOPE()
     let i = 1
     while i < 20
         if filereadable("cscope.out")
-            let db = getcwd() . "/cscope.out"
+            let db = a:var . "/cscope.out"
             let $CSCOPE_DB = db
             cs add $CSCOPE_DB
             let i = 20
         else
-            let db = g:myGenCSCOPE_DB. getcwd() ."/cscope.out"
+            let db = g:myGenCSCOPE_DB. a:var ."/cscope.out"
             if filereadable(expand(db))
                 let $CSCOPE_DB = db
                 cs add $CSCOPE_DB
