@@ -17,8 +17,6 @@ CSCOPE_DIR=~/CSCOPE
 echo "--------Start Scanning---------"
 for d in $genfolder
 do
-    echo "remove $CSCOPE_DIR/$d/ subdirs"
-    find $CSCOPE_DIR/$d/ \-type d |xargs rm -rf
     echo "Scanning... $d"
     mkdir -p $CSCOPE_DIR/$d
     eval "find $d -type f -and \\( $exgentype \\) > $CSCOPE_DIR/$d/cscope.files"
