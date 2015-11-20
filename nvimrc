@@ -386,18 +386,18 @@ function! ReloadCSCOPE(var)
     set csto=0
     set nocsverb
     let i = 1
-    while i < 20
+    while i < 15
         if filereadable("cscope.out")
             let db = a:var . "/cscope.out"
             let $CSCOPE_DB = db
             cs add $CSCOPE_DB
-            let i = 20
+            let i = 15
         else
             let db = g:myGenCSCOPE_DB. a:var ."/cscope.out"
             if filereadable(expand(db))
                 let $CSCOPE_DB = db
                 cs add $CSCOPE_DB
-                let i = 20
+                let i = 15
             else
                 cd ..
                 let i += 1
