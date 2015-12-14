@@ -20,8 +20,8 @@ if !filereadable(vundle_readme)
   let iCanHazVundle=0
 endif
 
-set rtp+=~/.nvim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.nvim/bundle/vundle
+call vundle#rc("~/.nvim/bundle")
 
 " let Vundle manage Vundle
 " required!
@@ -30,40 +30,31 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 "
 " original repos on github
-Bundle 'tomasr/molokai'
+Bundle 'MephistoMMM/molokai'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'Townk/vim-autoclose'
+"Bundle 'Townk/vim-autoclose'
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
-Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'jlanzarotta/bufexplorer'
 Bundle 'vim-scripts/CRefVim'
 Bundle 'pangloss/vim-javascript'
-Bundle 'joshhartigan/vim-reddit'
 Bundle 'ryanss/vim-hackernews'
-Bundle 'frankmorris/gtrans.vim-1'
 Bundle 'kdurant/LanguageRefVim'
 Bundle 'tpope/vim-surround'
-Bundle 'bling/vim-airline'
-"Bundle 'vim-scripts/L9'
-"Bundle 'ervandew/supertab'
 Bundle 'rking/ag.vim'
 Bundle 'justinmk/vim-syntax-extra'
-
 
 "Note
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-notes'
 
 "ag setting
-let g:agprg="/usr/bin/ag --column"
+let g:ag_prg="/usr/bin/ag --column"
 
 
 "
-let g:gtrans_DefaultLang = 'tw'
-let g:gtrans_Engine = 'google' " 或者 bing
 
 " set leader to ,
 "let mapleader=","
@@ -81,17 +72,9 @@ set tabstop=4 " insert 2 spaces for a tab
 set expandtab " use space instead of tab
 set softtabstop=4
 set shiftwidth=4 " the number of space characters inserted for indentation
-"set smarttab
-"set autoindent
-syntax on " enable syntax highlighting
 
 "----------yolin molokai-----------
 colors molokai " vim color scheme
-"Yolin: change molokai color
-"hi Visual     ctermbg=238
-"hi CursorLine ctermbg=237   cterm=none
-"hi Comment    ctermfg=102
-"hi Underlined ctermfg=78    cterm=underline
 "-------------- yolin end---------------
 
 "----------yolin papaercolor-----------
@@ -263,10 +246,10 @@ noremap <xF2> <esc>:TagbarToggle<cr>:call MySwitchToWorkBuf()<cr>
 noremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 "noremap <F4> <esc>:set noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
 noremap <F4> <esc>:set expandtab!<cr>
-noremap <F5> <esc>:Gtrans<cr>
-noremap <F6> <esc>:Reddit worldnews<cr>
-noremap <F7> <esc>:Reddit taiwan<cr>
-noremap <F8> <esc>:BufExplorer<cr>
+"noremap <F5> <esc>:<cr>
+"noremap <F6> <esc>:<cr>
+"noremap <F7> <esc>:<cr>
+noremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
 noremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
@@ -276,25 +259,18 @@ noremap <F12> <esc>:call ReloadCSCOPE("<c-r>=getcwd()<cr>")
 inoremap <xF1> <esc>:call MySwitchToWorkBuf()<cr>:NERDTreeToggle<cr>
 inoremap <leader><c-xF1> <esc>:NERDTreeFind<cr>
 inoremap <xF2> <esc>:call MySwitchToWorkBuf()<cr>:TagbarToggle<cr>
-"inoremap <xF3> <esc>:!grep -irsnI --color <c-r>+ <c-r>=getcwd()<cr>
 inoremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
-"inoremap <F4> <esc>:set noexpandtab softtabstop=8 shiftwidth=8 tabstop=4
 inoremap <F4> <esc>:set expandtab!<cr>
-inoremap <F5> <esc>:Gtrans<cr>
-inoremap <F6> <esc>:Reddit worldnews<cr>
-inoremap <F7> <esc>:Reddit taiwan<cr>
-inoremap <F8> <esc>:BufExplorer<cr>
+"inoremap <F5> <esc>:<cr>
+"inoremap <F6> <esc>:<cr>
+"inoremap <F7> <esc>:<cr>
+inoremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
 inoremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
 inoremap <F12> <esc>:call ReloadCSCOPE("<c-r>=getcwd()<cr>")
 
-"vnoremap <xF3> y<esc>:!grep -irsnI --color <c-r>0 <c-r>=getcwd()<cr>
 vnoremap <xF3> y<esc>:Ag "<c-r>0" <c-r>=getcwd()<cr>
-
-
-"noremap <leader>/ <esc>:noh<cr>
-"noremap <leader>t <esc>:Gtrans<cr>
 
 noremap <c-j> :GitGutterNextHunk<cr>
 noremap <c-k> :GitGutterPrevHunk<cr>
@@ -344,7 +320,7 @@ inoremap <c-v> <c-r>+
 inoremap <c-s> <ESC>:update<cr>
 nnoremap <c-s> :update<cr>
 "nnoremap <leader><space> <ESC>:redraw!<cr>
-nnoremap <leader>q <ESC>:q<cr>
+nnoremap <leader>q <ESC>:bd<cr>
 nnoremap <leader>aq <ESC>:qa<cr>
 
 "au Filetype html,htm,xml,xsl source ~/.nvim/scripts/closetag.vim
@@ -421,19 +397,8 @@ if has("cscope")
 
 endif
 
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'qf' : 1,
-      \ 'notes' : 1,
-      \ 'markdown' : 1,
-      \ 'unite' : 1,
-      \ 'text' : 1,
-      \ 'vimwiki' : 1,
-      \ 'gitcommit' : 1,
-      \}
-
 let g:notes_directories = ['~/Documents/Notes']
-"let g:ycm_global_ycm_extra_conf = '~/.nvim/.ycm_extra_conf.py'
+
 
 nnoremap <leader>. :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
@@ -503,12 +468,3 @@ endfunction
 command! -nargs=* -complete=file MySwitchToWorkBuf call MySwitchToWorkBuf()
 
 "-------------- yolin end---------------
-"
-"
-"
-"
-"Read pdf
-command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
-command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
-
-"exec ReloadAllCSCOPE()
