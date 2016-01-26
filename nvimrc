@@ -50,6 +50,9 @@ Bundle 'justinmk/vim-syntax-extra'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-notes'
 
+"paste
+Bundle 'ConradIrwin/vim-bracketed-paste'
+
 "ag setting
 let g:ag_prg="/usr/bin/ag --column"
 
@@ -315,7 +318,8 @@ vnoremap <c-v> "+p
 "vnoremap <c-c> "*y
 "vnoremap <c-v> "*p
 inoremap <c-z> <esc>ui
-inoremap <c-v> <c-r>+
+inoremap <c-v> <esc>:set paste<cr>a<c-r>+<esc>:set nopaste<cr>
+
 "nnoremap <leader>u <ESC>:silent! !~/.nvim/gentag.sh <c-r>=getcwd()<cr> &<cr>
 inoremap <c-s> <ESC>:update<cr>
 nnoremap <c-s> :update<cr>
@@ -326,10 +330,11 @@ nnoremap <leader>aq <ESC>:qa<cr>
 "au Filetype html,htm,xml,xsl source ~/.nvim/scripts/closetag.vim
 "autocmd VimEnter * source ~/.nvim/Session.vim 
 au BufRead * set expandtab softtabstop=4 shiftwidth=4
-au BufRead *.make set filetype=make noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
-au BufRead *.ISD set filetype=make noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
-au BufRead *.in set noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
-au BufRead Makefile set noexpandtab softtabstop=8 shiftwidth=8 tabstop=4
+au BufRead *.make set filetype=make noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
+au BufRead *.ISD set filetype=make noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
+au BufRead *.in set noexpandtab softtabstop=8 shiftwidth=4 tabstop=4
+au BufRead Makefile set noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
+au BufRead Makefile* set noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
 au BufRead *.htm set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
 au BufRead *.html set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
 au BufRead *.cgi set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
@@ -337,6 +342,7 @@ au BufRead *js.htm set filetype=javascript noexpandtab softtabstop=4 shiftwidth=
 au BufRead *js.html set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
 au BufRead *css.htm set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
 au BufRead *css.html set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
+au BufRead Config.in set syntax=kconfig
 
 "au VimEnter * NERDTreeFind
 "
