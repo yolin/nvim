@@ -126,6 +126,7 @@ cnoremap <C-K> <C-U>
 
 " status line {
 set laststatus=2
+set statusline=%<%F\ %h%m%r%y%=%-14.(%l,%c%V%)\ %P
 " --- ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
