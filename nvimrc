@@ -20,6 +20,7 @@ if !filereadable(vundle_readme)
   let iCanHazVundle=0
 endif
 
+set termguicolors
 set rtp+=~/.nvim/bundle/vundle
 call vundle#rc("~/.nvim/bundle")
 
