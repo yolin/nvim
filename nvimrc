@@ -293,7 +293,10 @@ inoremap <c-xUp> <esc><c-w>k
 inoremap <c-xLeft> <esc><c-w>h
 inoremap <c-xRight> <esc><c-w>l
 
-
+noremap <leader>jj <c-w>j
+noremap <leader>kk <c-w>k
+noremap <leader>hh <c-w>h
+noremap <leader>ll <c-w>l
 
 "noremap <m-xLeft> <esc>:tabprevious<cr>
 "noremap <m-xRight> <esc>:tabnext<cr>
