@@ -54,6 +54,10 @@ Bundle 'xolox/vim-notes'
 "paste
 Bundle 'ConradIrwin/vim-bracketed-paste'
 
+Bundle 'kshenoy/vim-signature'
+Bundle 'Yggdroot/indentLine'
+Bundle 'vim-scripts/MultipleSearch'
+
 "ag setting
 let g:ag_prg="/usr/bin/ag --column"
 
@@ -212,8 +216,11 @@ set tw=500
 
 set wrap "Wrap lines
 
-set list
-set listchars=tab:\|\ 
+
+"use Yggdroot/indentLine to replace
+"set list
+"set listchars=tab:\|\ 
+
 "supertab
 "minibuf
                 
@@ -251,8 +258,8 @@ noremap <xF2> <esc>:TagbarToggle<cr>:call MySwitchToWorkBuf()<cr>
 noremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 "noremap <F4> <esc>:set noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
 noremap <F4> <esc>:set expandtab!<cr>
-"noremap <F5> <esc>:<cr>
-"noremap <F6> <esc>:<cr>
+noremap <F5> <esc>:Search <c-r>+<cr>
+noremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
 "noremap <F7> <esc>:<cr>
 noremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
@@ -266,8 +273,8 @@ inoremap <leader><c-xF1> <esc>:NERDTreeFind<cr>
 inoremap <xF2> <esc>:call MySwitchToWorkBuf()<cr>:TagbarToggle<cr>
 inoremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 inoremap <F4> <esc>:set expandtab!<cr>
-"inoremap <F5> <esc>:<cr>
-"inoremap <F6> <esc>:<cr>
+inoremap <F5> <esc>:Search <c-r>+<cr>
+inoremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
 "inoremap <F7> <esc>:<cr>
 inoremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
@@ -275,6 +282,7 @@ inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
 inoremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
 inoremap <F12> <esc>:call ReloadCSCOPE("<c-r>=getcwd()<cr>")
 
+vnoremap <F5> y<esc>:Search <c-r>0<cr>
 vnoremap <xF3> y<esc>:Ag "<c-r>0" <c-r>=getcwd()<cr>
 
 noremap <c-j> :GitGutterNextHunk<cr>
