@@ -58,6 +58,11 @@ Bundle 'kshenoy/vim-signature'
 Bundle 'Yggdroot/indentLine'
 Bundle 'vim-scripts/MultipleSearch'
 
+"MultieSearch
+let g:MultipleSearchMaxColors=13
+let g:MultipleSearchColorSequence="red,yellow,blue,green,magenta,lightred,cyan,lightyellow,gray,brown,lightblue,darkmagenta,darkcyan"
+let g:MultipleSearchTextColorSequence="white,black,white,black,white,black,black,black,black,white,black,white,white"
+
 "ag setting
 let g:ag_prg="/usr/bin/ag --column"
 
