@@ -222,9 +222,8 @@ set tw=500
 set wrap "Wrap lines
 
 
-"use Yggdroot/indentLine to replace
-"set list
-"set listchars=tab:\|\ 
+set list
+set listchars=tab:\|\ 
 
 "supertab
 "minibuf
