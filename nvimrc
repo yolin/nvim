@@ -398,11 +398,13 @@ function! ReloadCSCOPE(var)
                 let i = 15
             else
                 let db = db . "/.."
-                cd ..
+                execute "cd .."
                 let i += 1
             endif
         endwhile
     endif
+    "reset position
+    execute "cd "a:var
     cs show
 endfunction
 
