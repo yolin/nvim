@@ -1,5 +1,3 @@
-# vimsetting
-
 #fix clipboard
 apt install xsel
 
@@ -10,3 +8,6 @@ apt install xsel
 
 #install ag, very fast search
 apt install silversearcher-ag
+
+#run vi and type
+:BundleInstall
