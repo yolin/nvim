@@ -57,6 +57,13 @@ Bundle 'ConradIrwin/vim-bracketed-paste'
 Bundle 'kshenoy/vim-signature'
 Bundle 'Yggdroot/indentLine'
 Bundle 'vim-scripts/MultipleSearch'
+Bundle 'terryma/vim-multiple-cursors'
+
+"snip
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
 
 "MultieSearch
 let g:MultipleSearchMaxColors=13
