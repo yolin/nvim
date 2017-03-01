@@ -355,6 +355,7 @@ nnoremap <leader>aq <ESC>:qa<cr>
 "autocmd VimEnter * source ~/.nvim/Session.vim 
 au BufRead * set expandtab softtabstop=4 shiftwidth=4
 au BufRead *.make set filetype=make noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
+au BufRead *.mk set filetype=make noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
 au BufRead *.ISD set filetype=make noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
 au BufRead *.in set noexpandtab softtabstop=8 shiftwidth=4 tabstop=4
 au BufRead Makefile set noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
