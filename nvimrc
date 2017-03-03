@@ -353,21 +353,21 @@ nnoremap <leader>aq <ESC>:qa<cr>
 
 "au Filetype html,htm,xml,xsl source ~/.nvim/scripts/closetag.vim
 "autocmd VimEnter * source ~/.nvim/Session.vim 
-au BufRead * set expandtab softtabstop=4 shiftwidth=4
-au BufRead *.make set filetype=make noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
-au BufRead *.mk set filetype=make noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
-au BufRead *.ISD set filetype=make noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
-au BufRead *.in set noexpandtab softtabstop=8 shiftwidth=4 tabstop=4
-au BufRead Makefile set noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
-au BufRead Makefile* set noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
-au BufRead *.conf set noexpandtab softtabstop=4 shiftwidth=8 tabstop=4
-au BufRead *.htm set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
-au BufRead *.html set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
-au BufRead *.cgi set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
-au BufRead *js.htm set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
-au BufRead *js.html set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
-au BufRead *css.htm set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
-au BufRead *css.html set filetype=javascript noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
+au BufRead * set expandtab softtabstop=4 shiftwidth=4 tabstop=4
+au BufRead *.make set filetype=make noexpandtab
+au BufRead *.mk set filetype=make noexpandtab
+au BufRead *.ISD set filetype=make noexpandtab
+au BufRead Makefile set filetype=make noexpandtab
+au BufRead Makefile* set filetype=make noexpandtab
+au BufRead *.in set noexpandtab
+au BufRead *.conf set noexpandtab
+au BufRead *.htm set filetype=javascript noexpandtab
+au BufRead *.html set filetype=javascript noexpandtab
+au BufRead *.cgi set filetype=javascript noexpandtab
+au BufRead *js.htm set filetype=javascript noexpandtab
+au BufRead *js.html set filetype=javascript noexpandtab
+au BufRead *css.htm set filetype=javascript noexpandtab
+au BufRead *css.html set filetype=javascript noexpandtab
 au BufRead *.in set syntax=kconfig
 
 "au VimEnter * NERDTreeFind
