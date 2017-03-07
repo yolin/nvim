@@ -341,6 +341,13 @@ vnoremap <c-v> "+p
 "vnoremap <c-x> "*x
 "vnoremap <c-c> "*y
 "vnoremap <c-v> "*p
+
+vnoremap y "zy
+vnoremap p "zp
+noremap y "zy
+noremap yy "zyy
+noremap p "zp
+
 inoremap <c-z> <esc>ui
 inoremap <c-v> <esc>:set paste<cr>a<c-r>+<esc>:set nopaste<cr>
 
