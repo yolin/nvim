@@ -1,8 +1,8 @@
 install neovim
 ===============
-sudo add-apt-repository ppa:neovim-ppa/stable  
+echo | sudo add-apt-repository ppa:neovim-ppa/stable  
 sudo apt-get update  
-sudo apt-get install neovim  
+echo Y | sudo apt-get install neovim  
 
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60  
 echo | sudo update-alternatives --config vi  
