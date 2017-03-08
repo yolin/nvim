@@ -223,7 +223,7 @@ set nobackup
 set nowb
 set noswapfile
 
-set lbr
+"set lbr
 set tw=500
 
 set wrap "Wrap lines
@@ -260,7 +260,6 @@ set winaltkeys=no
 nnoremap <space><space> :noh<cr>:call MySwitchToWorkBuf()<cr>
 
 nnoremap `<esc> :qa<cr>
-
 
 noremap <leader><xF1> <esc>:NERDTreeFind<cr>
 noremap <xF1> <esc>:NERDTreeToggle<cr>
@@ -347,6 +346,9 @@ vnoremap p "zp
 noremap y "zy
 noremap yy "zyy
 noremap p "zp
+
+noremap Y "zY
+noremap P "zP
 
 inoremap <c-z> <esc>ui
 inoremap <c-v> <esc>:set paste<cr>a<c-r>+<esc>:set nopaste<cr>
