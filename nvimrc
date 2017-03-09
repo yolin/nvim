@@ -275,7 +275,7 @@ noremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
 noremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
-noremap <F12> <esc>:call ReloadCSCOPE("<c-r>=getcwd()<cr>")
+noremap <F12> <esc>:call ReloadCSCOPE()<cr>
 
 
 inoremap <xF1> <esc>:call MySwitchToWorkBuf()<cr>:NERDTreeToggle<cr>
@@ -290,7 +290,7 @@ inoremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
 inoremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
-inoremap <F12> <esc>:call ReloadCSCOPE("<c-r>=getcwd()<cr>")
+inoremap <F12> <esc>:call ReloadCSCOPE()<cr>
 
 vnoremap <F5> y<esc>:Search <c-r>0<cr>
 vnoremap <xF3> y<esc>:Ag "<c-r>0" <c-r>=getcwd()<cr>
@@ -385,6 +385,7 @@ au BufRead *.in set syntax=kconfig
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 "
 let g:myGenCSCOPE_DB = "~/CSCOPE/"
+let g:myGenIndex = 1
 
 function! ReloadAllCSCOPE(var)
     let CSFOLDER=system('find ' .g:myGenCSCOPE_DB. ' -name "*.out" |grep ' . a:var)
@@ -397,32 +398,163 @@ function! ReloadAllCSCOPE(var)
     "cs show
 endfunction
 
-function! ReloadCSCOPE(var)
-    silent! cs kill -1
-    set cscopetag
-    set csto=0
-    set nocsverb
-    let i = 1
-    if filereadable("cscope.out")
-        let db = a:var . "/cscope.out"
-        execute "silent! cs add "db
-    else
-        let db = g:myGenCSCOPE_DB . a:var
-        execute "!mkdir -p "db
-        while i < 15
-            if filereadable(expand(db . "/cscope.out"))
-                execute "silent! cs add "db
-                let i = 15
-            else
-                let db = db . "/.."
-                execute "cd .."
-                let i += 1
-            endif
-        endwhile
+function! MyGetInput(start,end,idx)
+    let tmp = [0,0] "index,option  -1:quit,0:do nothing,1:enter,2:edit,3:switch,4:back switch
+    let tmp[0] = a:idx
+    let gc = getchar()
+    let nc = nr2char(gc)
+    let i = '0'
+
+    if gc=="\<right>" || nc == 'l'
+        let tmp[1] = 3
+    elseif gc=="\<left>" || nc == 'h'
+        let tmp[1] = 4
+    elseif gc == "\<backspace>"
+        let tmp[1] = 5
+    elseif nc == "i" || nc == 'a' || nc == "\r" || nc == "\n"
+        let tmp[1] =  2
+    elseif gc == "\<up>" || nc == 'k'
+        let tmp[0] -= 1
+        if(tmp[0]<a:start)
+            let tmp[0] = a:end
+        endif
+        let tmp[1] =  0
+    elseif gc == "\<down>" || nc == 'j'
+        let tmp[0] += 1
+        if(tmp[0]>a:end)
+            let tmp[0] = a:start
+        endif
+        let tmp[1] = 0
+    elseif nc == nr2char(27)  || nc == "q" "escape
+        let tmp[1] = -1
+    elseif nc == '0'
+        if(0<=a:end)
+            let tmp = [0,2]
+        endif
+    elseif nc == '1'
+        if(1<=a:end)
+            let tmp = [1,2]
+        endif
+    elseif nc == '2'
+        if(2<=a:end)
+            let tmp = [2,2]
+        endif
+    elseif nc == '3'
+        if(3<=a:end)
+            let tmp = [3,2]
+        endif
+    elseif nc == '4'
+        if(4<=a:end)
+            let tmp = [4,2]
+        endif
+    elseif nc == '5'
+        if(5<=a:end)
+            let tmp = [5,2]
+        endif
+    elseif nc == '6'
+        if(6<=a:end)
+            let tmp = [6,2]
+        endif
+    elseif nc == '7'
+        if(7<=a:end)
+            let tmp = [7,2]
+        endif
+    elseif nc == '8'
+        if(8<=a:end)
+            let tmp = [8,2]
+        endif
+    elseif nc == '9'
+        if(9<=a:end)
+            let tmp = [9,2]
+        endif
     endif
-    "reset position
-    execute "cd "a:var
-    cs show
+    return tmp
+endfunc
+
+function! ShowMyGenTag()
+    let startidx = 0
+    let endidx = 4
+    let tmp = ['CS action:', ' 1) Show', ' 2) Add',' 3) Delete',' 4) Quit']
+    let string = ' '
+    let i = 0
+    while i <= endidx
+        if( g:myGenIndex == i )
+            let string = '>'.tmp[i]
+        else
+            let string = ' '.tmp[i]
+        endif
+        echo string
+        let i += 1
+    endwhile
+
+    let idxdo = [0,0] "return index and options
+    let idxdo =  MyGetInput(startidx,endidx,g:myGenIndex)
+    let g:myGenIndex = idxdo[0]
+
+    return idxdo[1]
+endfunc
+
+function! RecCSCOPE()
+    let action = ShowMyGenTag()
+    let recursive = 1
+    let i = 1
+    if(action == 2 || action == 5)
+        if(g:myGenIndex == 1)
+            redraw!
+            execute 'cs show'
+        elseif(g:myGenIndex == 2)
+            "set cscopetag
+            "set csto = 0
+            "set nocsverb
+            let cstemp = input("Dir?", expand("%:p:h"), "file")
+            let currentDir = expand(getcwd())
+            let db = g:myGenCSCOPE_DB . cstemp
+            redraw!
+            execute 'cd ' . g:myGenCSCOPE_DB . cstemp
+            while i < 15
+                if filereadable(expand(db . "cscope.out"))
+                    execute 'silent! cs add ' . db
+                    let i = 15
+                else
+                    let db = db . "/../"
+                    execute 'cd ..'
+                    let i += 1
+                endif
+            endwhile
+            execute 'cd ' . currentDir
+        elseif(g:myGenIndex == 3)
+            let cstemp = input("Delete?")
+            redraw!
+            execute 'cs kill ' . cstemp
+        elseif(g:myGenIndex == 4)
+            redraw!
+            let recursive = 0
+        else
+            redraw!
+            let recursive = 0
+        endif
+    elseif(action == -1)
+        redraw!
+        let recursive = 0
+    else
+        redraw!
+    endif
+
+    return recursive
+endfunction
+
+function! ReloadCSCOPE()
+    call MySwitchToWorkBuf()
+    execute "cs show"
+    let myGenTagDir = expand(getcwd())
+    let tmp = 1
+    while tmp != 0
+        let tmp = RecCSCOPE()
+        if(tmp == 0)
+            redraw!
+            return
+        endif
+    endwhile
 endfunction
 
 if has("cscope")
