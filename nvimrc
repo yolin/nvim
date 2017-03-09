@@ -65,6 +65,10 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 
+"yank
+Bundle 'christoomey/vim-system-copy'
+
+
 "MultieSearch
 let g:MultipleSearchMaxColors=13
 let g:MultipleSearchColorSequence="red,yellow,blue,green,magenta,lightred,cyan,lightyellow,gray,brown,lightblue,darkmagenta,darkcyan"
@@ -340,15 +344,6 @@ vnoremap <c-v> "+p
 "vnoremap <c-x> "*x
 "vnoremap <c-c> "*y
 "vnoremap <c-v> "*p
-
-vnoremap y "zy
-vnoremap p "zp
-noremap y "zy
-noremap yy "zyy
-noremap p "zp
-
-noremap Y "zY
-noremap P "zP
 
 inoremap <c-z> <esc>ui
 inoremap <c-v> <esc>:set paste<cr>a<c-r>+<esc>:set nopaste<cr>
