@@ -66,7 +66,10 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 
 "yank
-Bundle 'christoomey/vim-system-copy'
+Bundle 'tpope/vim-repeat'
+Bundle 'svermeulen/vim-easyclip'
+
+vnoremap d X
 
 
 "MultieSearch
