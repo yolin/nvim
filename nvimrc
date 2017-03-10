@@ -69,9 +69,6 @@ Bundle 'honza/vim-snippets'
 Bundle 'tpope/vim-repeat'
 Bundle 'svermeulen/vim-easyclip'
 
-vnoremap d X
-
-
 "MultieSearch
 let g:MultipleSearchMaxColors=13
 let g:MultipleSearchColorSequence="red,yellow,blue,green,magenta,lightred,cyan,lightyellow,gray,brown,lightblue,darkmagenta,darkcyan"
@@ -471,8 +468,8 @@ endfunc
 
 function! ShowMyGenTag()
     let startidx = 0
-    let endidx = 4
-    let tmp = ['CS action:', ' 1) Show', ' 2) Add',' 3) Delete',' 4) Quit']
+    let endidx = 5
+    let tmp = ['CS action:', ' 1) Add directly', ' 2) Show', ' 3) Add',' 4) Delete',' 5) Quit']
     let string = ' '
     let i = 0
     while i <= endidx
@@ -497,18 +494,23 @@ function! RecCSCOPE()
     let recursive = 1
     let i = 1
     if(action == 2 || action == 5)
-        if(g:myGenIndex == 1)
+        if(g:myGenIndex == 2)
             redraw!
             execute 'cs show'
-        elseif(g:myGenIndex == 2)
+        elseif(g:myGenIndex == 1 || g:myGenIndex == 3)
             "set cscopetag
             "set csto = 0
             "set nocsverb
-            let cstemp = input("Dir?", expand("%:p:h"), "file")
             let currentDir = expand(getcwd())
+            if(g:myGenIndex == 3)
+                let cstemp = input("Dir?", expand("%:p:h"), "file")
+            else
+                let cstemp = currentDir
+            endif
             let db = g:myGenCSCOPE_DB . cstemp
             redraw!
-            execute 'cd ' . g:myGenCSCOPE_DB . cstemp
+            execute 'silent !mkdir -p ' . db
+            execute 'cd ' . db
             while i < 15
                 if filereadable(expand(db . "cscope.out"))
                     execute 'silent! cs add ' . db
@@ -520,11 +522,14 @@ function! RecCSCOPE()
                 endif
             endwhile
             execute 'cd ' . currentDir
-        elseif(g:myGenIndex == 3)
+            if(g:myGenIndex == 1)
+                let recursive = 0
+            endif
+        elseif(g:myGenIndex == 4)
             let cstemp = input("Delete?")
             redraw!
             execute 'cs kill ' . cstemp
-        elseif(g:myGenIndex == 4)
+        elseif(g:myGenIndex == 5)
             redraw!
             let recursive = 0
         else
