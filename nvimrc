@@ -69,6 +69,11 @@ Bundle 'honza/vim-snippets'
 Bundle 'tpope/vim-repeat'
 Bundle 'svermeulen/vim-easyclip'
 
+let g:EasyClipUseCutDefaults = 0
+
+xmap x <Plug>MoveMotionXPlug
+nmap X <Plug>MoveMotionLinePlug
+
 "MultieSearch
 let g:MultipleSearchMaxColors=13
 let g:MultipleSearchColorSequence="red,yellow,blue,green,magenta,lightred,cyan,lightyellow,gray,brown,lightblue,darkmagenta,darkcyan"
