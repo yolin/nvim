@@ -373,6 +373,8 @@ au BufRead *js.html set filetype=javascript noexpandtab
 au BufRead *css.htm set filetype=javascript noexpandtab
 au BufRead *css.html set filetype=javascript noexpandtab
 au BufRead *.in set syntax=kconfig
+au BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
+
 
 "au VimEnter * NERDTreeFind
 "
