@@ -122,7 +122,7 @@ set history=50 " keep 50 lines of command line history
 "if has("gui_macvim") " macvim shift movement
 "  let macvim_hig_shift_movement = 1
 "endif
-set cursorline " highlight current line
+"set cursorline " highlight current line , slower....disable it
 set clipboard=unnamed " use +
 "set clipboard+=unnamedplus "use *
 set showmatch " Cursor shows matching ) and }
