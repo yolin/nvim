@@ -279,7 +279,7 @@ noremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 noremap <F4> <esc>:set expandtab!<cr>
 noremap <F5> <esc>:Search <c-r>+<cr>
 noremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
-"noremap <F7> <esc>:<cr>
+noremap <F7> <esc>:SignatureListBufferMark<cr>
 noremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
@@ -294,7 +294,7 @@ inoremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 inoremap <F4> <esc>:set expandtab!<cr>
 inoremap <F5> <esc>:Search <c-r>+<cr>
 inoremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
-"inoremap <F7> <esc>:<cr>
+inoremap <F7> <esc>:SignatureListBufferMark<cr>
 inoremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
@@ -307,8 +307,8 @@ vnoremap <xF3> y<esc>:Ag "<c-r>0" <c-r>=getcwd()<cr>
 noremap <c-j> :GitGutterNextHunk<cr>
 noremap <c-k> :GitGutterPrevHunk<cr>
 
-noremap <m-a> :A<cr>
-inoremap <m-a> <esc>:A<cr>
+noremap <m-j> ]`
+noremap <m-k> [`
 
 noremap <c-xDown> <c-w>j
 noremap <c-xUp> <c-w>k
@@ -634,7 +634,8 @@ function! MySwitchToWorkBuf()
     if(nerdname == 'NERD_tree_')
         execute "wincmd l"
     endif
-    if(tempname == '__Tagbar__')
+
+    if(strpart(tempname,0,9) == '__Tagbar__'))
         execute "wincmd h"
     endif
     if(tempname == '-MiniBufExplorer-')
@@ -642,6 +643,9 @@ function! MySwitchToWorkBuf()
     endif
     if(tempname == 'TransWindow')
         bd
+    endif
+    if(tempname == '') "SignatureBuffer
+        execute "wincmd k"
     endif
     if(tempname == '.reddit')
         bd
