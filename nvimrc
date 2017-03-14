@@ -71,9 +71,6 @@ Bundle 'svermeulen/vim-easyclip'
 
 let g:EasyClipUseCutDefaults = 0
 
-xmap x <Plug>MoveMotionXPlug
-nmap X <Plug>MoveMotionLinePlug
-
 "MultieSearch
 let g:MultipleSearchMaxColors=13
 let g:MultipleSearchColorSequence="red,yellow,blue,green,magenta,lightred,cyan,lightyellow,gray,brown,lightblue,darkmagenta,darkcyan"
@@ -90,7 +87,6 @@ let g:ag_prg="/usr/bin/ag --column"
 let g:mapleader=","
 
 " general
-filetype plugin indent on " enable filetype-specific plugins
 set history=50 " keep 50 lines of command line history
 set number " enable line numbers
 set autoindent " enable autoindent
@@ -135,20 +131,7 @@ set showmode " Show current mode
 " disable sound on errors
 "set noeb vb t_vb=
 
-" add spell checking and automatic wrapping at the
-" recommended 72 columns to you commit messages
-autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" to move effeciently between splits
-nmap gh <C-w>h
-nmap gj <C-w>j
-nmap gk <C-w>k
-nmap gl <C-w>l
-
-" Bash like keys for the command line
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
-cnoremap <C-K> <C-U>
 
 " status line {
 set laststatus=2
@@ -164,19 +147,14 @@ let g:gitgutter_enabled = 1
 highlight clear SignColumn " For the same appearance as your line number column
 
 " --- tagbar
-"nmap <D-\> :TagbarToggle<CR>
 "let g:tagbar_left=1
 
-" --- ctrlp
-let g:ctrlp_dont_split = 'NERD_tree_2'
-let g:ctrlp_show_hidden = 1
-
-
 " ------------------------------------------------yolin add --------------------------------------------
+filetype on
+filetype plugin on
+filetype indent on
+syntax on
 
-
-set nocompatible
-set nu
 set ruler
 set tags=tags;
 set write
@@ -203,27 +181,8 @@ endif
 set noerrorbells
 set novisualbell
 
-
-"
-" Plugins config
-"
-" CtrlP
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-" vim-airline
-let g:airline#extensions#tabline#enabled=0
-let g:airline#extensions#tabline#fnamecollapse=1
-let g:airline#extensions#tabline#formatter='unique_tail'
-"let g:airline_section_b=0
-" whitspace counter
-let g:airline_section_warning=0
-
-
-"env
-"au BufRead *.html set filetype=htmlm4
-"au BufRead *.htm set filetype=htmlm4
-"set switchbuf+=newtab,usetab,newtab
-"buf都開在新的tab
-"set switchbuf+=useopen,newtab
+set hlsearch
+set autochdir
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -231,29 +190,22 @@ let g:airline_section_warning=0
 set nobackup
 set nowb
 set noswapfile
-
 "set lbr
 set tw=500
-
 set wrap "Wrap lines
-
-
+"list space/tab
 set list
+set winaltkeys=no
+
 set listchars=tab:\|\ 
 
-"supertab
-"minibuf
-                
-au BufWinEnter \[Buf\ List\] setl nonumber
-
-
 "a.vim
-let g:alternateSearchPath = 'sfr:./h,sfr:./include,sfr:./source,sfr:./src,sfr:./,sfr:./inc,sfr:../source,sfr:../src,sfr:../include,sfr:../inc'
+let g:alternateSearchPath='sfr:./h,sfr:./include,sfr:./source,sfr:./src,sfr:./,sfr:./inc,sfr:../source,sfr:../src,sfr:../include,sfr:../inc'
 
 "auto remove blank on line end
 "autocmd FileType c,cpp,java,php,perl,python,ruby,sh,html,htm autocmd BufWritePre  :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-
-let g:EasyMotion_leader_key = 'f'
+"
+let g:EasyMotion_leader_key='f'
 
 "NERD.vim
 let NERDTreeWinPos="left"
@@ -263,9 +215,8 @@ let NERDTreeWinPos="left"
 "autocmd VimEnter * NERDTreeToggle
 "autocmd VimEnter * wincmd p
 
-"map
-set winaltkeys=no
 
+"mapping
 nnoremap <space><space> :noh<cr>:call MySwitchToWorkBuf()<cr>
 
 nnoremap `<esc> :qa<cr>
@@ -330,7 +281,6 @@ noremap <leader>ll <c-w>l
 "inoremap <m-xLeft> <esc>:tabprevious<cr>
 "inoremap <m-xRight> <esc>:tabnext<cr>
 
-
 noremap <m-xUp> <esc>:bp<cr>
 noremap <m-xDown> <esc>:bn<cr>
 noremap <m-xLeft> <esc>:vertical res -3<cr>
@@ -360,6 +310,21 @@ nnoremap <c-s> :update<cr>
 nnoremap <leader>q <ESC>:bd<cr>
 nnoremap <leader>aq <ESC>:qa<cr>
 
+" to move effeciently between splits
+nmap gh <C-w>h
+nmap gj <C-w>j
+nmap gk <C-w>k
+nmap gl <C-w>l
+
+" Bash like keys for the command line
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-K> <C-U>
+
+" --- vim-easyclip
+xmap x <Plug>MoveMotionXPlug
+nmap X <Plug>MoveMotionLinePlug
+
 "au Filetype html,htm,xml,xsl source ~/.nvim/scripts/closetag.vim
 "autocmd VimEnter * source ~/.nvim/Session.vim 
 au BufRead * set expandtab softtabstop=4 shiftwidth=4 tabstop=4
@@ -379,6 +344,12 @@ au BufRead *css.htm set filetype=javascript noexpandtab
 au BufRead *css.html set filetype=javascript noexpandtab
 au BufRead *.in set syntax=kconfig
 au BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
+
+" add spell checking and automatic wrapping at the
+" recommended 72 columns to you commit messages
+au Filetype gitcommit setlocal spell textwidth=72
+
+au BufWinEnter \[Buf\ List\] setl nonumber
 
 
 "au VimEnter * NERDTreeFind
@@ -476,7 +447,7 @@ endfunc
 function! ShowMyGenTag()
     let startidx = 0
     let endidx = 5
-    let tmp = ['CS action:', ' 1) Add directly', ' 2) Show', ' 3) Add',' 4) Delete',' 5) Quit']
+    let tmp = ['CS action:', ' 1) Add directly', ' 2) Show', ' 3) Add',' 4) Delete',' 5/q) Quit']
     let string = ' '
     let i = 0
     while i <= endidx
@@ -535,7 +506,10 @@ function! RecCSCOPE()
         elseif(g:myGenIndex == 4)
             let cstemp = input("Delete?")
             redraw!
-            execute 'cs kill ' . cstemp
+            if( cstemp != "" )
+                execute 'cs kill ' . cstemp
+                execute 'silent! cs reset'
+            endif
         elseif(g:myGenIndex == 5)
             redraw!
             let recursive = 0
@@ -583,20 +557,6 @@ if has("cscope")
 endif
 
 let g:notes_directories = ['~/Documents/Notes']
-
-
-nnoremap <leader>. :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-set hlsearch
-" =============================================================================
-" SET THE GUI COLOR SCHEME
-" =============================================================================
-"
-filetype on
-filetype plugin on
-filetype indent on
-syntax on
-set autochdir
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " global variable
 "
