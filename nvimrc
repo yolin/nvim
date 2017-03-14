@@ -272,7 +272,7 @@ nnoremap `<esc> :qa<cr>
 
 noremap <leader><xF1> <esc>:NERDTreeFind<cr>
 noremap <xF1> <esc>:NERDTreeToggle<cr>
-noremap <xF2> <esc>:TagbarToggle<cr>:call MySwitchToWorkBuf()<cr>
+noremap <xF2> <esc>:TagbarToggle<cr>
 "noremap <xF3> <esc>:!grep --color -irsnI <c-r>+ <c-r>=getcwd()<cr>
 noremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 "noremap <F4> <esc>:set noexpandtab softtabstop=4 shiftwidth=4 tabstop=4
@@ -289,7 +289,7 @@ noremap <F12> <esc>:call ReloadCSCOPE()<cr>
 
 inoremap <xF1> <esc>:call MySwitchToWorkBuf()<cr>:NERDTreeToggle<cr>
 inoremap <leader><c-xF1> <esc>:NERDTreeFind<cr>
-inoremap <xF2> <esc>:call MySwitchToWorkBuf()<cr>:TagbarToggle<cr>
+inoremap <xF2> <esc>:TagbarToggle<cr>
 inoremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 inoremap <F4> <esc>:set expandtab!<cr>
 inoremap <F5> <esc>:Search <c-r>+<cr>
@@ -613,44 +613,23 @@ let g:myMenuIndex = 0
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! MySwitchToWorkBuf()
-    let tempname = bufname("%")
-    let nerdname = tempname
-
-    if( strlen(nerdname) > 10 )
-        let nerdname = strpart(nerdname,0,10)
-    endif
-
-    if(tempname == '' || nerdname == 'NERD_tree_' || tempname == '-MiniBufExplorer-' || tempname == '__Tagbar__')
-        2 wincmd w
-    endif
 
     let tempname = bufname("%")
-    let nerdname = tempname
 
-    if( strlen(nerdname) > 10 )
-        let nerdname = strpart(nerdname,0,10)
+    if( strlen(tempname) > 10 )
+        let tempname = strpart(tempname,0,10)
     endif
 
-    if(nerdname == 'NERD_tree_')
+    if(tempname == 'NERD_tree_')
         execute "wincmd l"
     endif
 
-    if(strpart(tempname,0,9) == '__Tagbar__'))
+    if(tempname == '__Tagbar__')
         execute "wincmd h"
     endif
-    if(tempname == '-MiniBufExplorer-')
-        execute "wincmd j"
-    endif
-    if(tempname == 'TransWindow')
-        bd
-    endif
+
     if(tempname == '') "SignatureBuffer
         execute "wincmd k"
-    endif
-    if(tempname == '.reddit')
-        bd
-        unmap o
-        unmap O
     endif
     return 0
 endfunction
