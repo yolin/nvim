@@ -513,9 +513,6 @@ function! RecCSCOPE()
                 endif
             endwhile
             execute 'cd ' . currentDir
-            if(g:myGenIndex == 1)
-                let recursive = 0
-            endif
             let recursive = 1
             call UpdateCscopeShow()
         elseif(g:myGenIndex == 0)
