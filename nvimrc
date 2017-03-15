@@ -232,7 +232,7 @@ noremap <F5> <esc>:Search <c-r>+<cr>
 noremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
 noremap <F7> <esc>:SignatureListBufferMark<cr>
 noremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
-noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
+"noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
 noremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
 noremap <F12> <esc>:call ReloadCSCOPE()<cr>
@@ -247,7 +247,7 @@ inoremap <F5> <esc>:Search <c-r>+<cr>
 inoremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
 inoremap <F7> <esc>:SignatureListBufferMark<cr>
 inoremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
-inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
+"inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
 inoremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
 inoremap <F12> <esc>:call ReloadCSCOPE()<cr>
@@ -358,6 +358,7 @@ au BufWinEnter \[Buf\ List\] setl nonumber
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 "
 let g:myGenCSCOPE_DB = "~/CSCOPE/"
+let g:myCSCOPE_SHOW = "/tmp/cscope_show.txt"
 let g:myGenIndex = 1
 
 function! ReloadAllCSCOPE(var)
@@ -398,6 +399,8 @@ function! MyGetInput(start,end,idx)
             let tmp[0] = a:start
         endif
         let tmp[1] = 0
+    elseif gc == "\<F12>"
+        let tmp[1] = -12
     elseif nc == nr2char(27)  || nc == "q" "escape
         let tmp[1] = -1
     elseif nc == '0'
@@ -446,10 +449,14 @@ endfunc
 
 function! ShowMyGenTag()
     let startidx = 0
-    let endidx = 5
-    let tmp = ['CS action:', ' 1) Add directly', ' 2) Show', ' 3) Add',' 4) Delete',' 5/q) Quit']
-    let string = ' '
+    let endidx = 4
+    "let tmp = ['CS action:', ' 1) Add directly', ' 2) Show', ' 3) Add',' 4) Delete',' 5/q) Quit']
+    let tmp = [' 0) Gen', ' 1) Add',' 2) Delete',' q) Quit',' F12) Auto add']
+    let csshow = system('cat ' . g:myCSCOPE_SHOW)
+    let string = ''
     let i = 0
+    echo csshow
+    echo '-----------'
     while i <= endidx
         if( g:myGenIndex == i )
             let string = '>'.tmp[i]
@@ -467,26 +474,32 @@ function! ShowMyGenTag()
     return idxdo[1]
 endfunc
 
+function! UpdateCscopeShow()
+    execute 'redir! > ' . g:myCSCOPE_SHOW
+    execute 'silent cs show'
+    execute 'redir END'
+    redraw!
+endfunc
+
 function! RecCSCOPE()
     let action = ShowMyGenTag()
     let recursive = 1
     let i = 1
-    if(action == 2 || action == 5)
-        if(g:myGenIndex == 2)
-            redraw!
-            execute 'cs show'
-        elseif(g:myGenIndex == 1 || g:myGenIndex == 3)
+    "-12 = F12
+    "action 2 = enter
+    if(action == 2 || action == 5 || action == -12)
+        if(g:myGenIndex == 1 || g:myGenIndex == 4 || action == -12)
             "set cscopetag
             "set csto = 0
             "set nocsverb
             let currentDir = expand(getcwd())
-            if(g:myGenIndex == 3)
-                let cstemp = input("Dir?", expand("%:p:h"), "file")
-            else
+            if(g:myGenIndex == 4 || action == -12)
+                "auto gen/add from ~/CSCOPE
                 let cstemp = currentDir
+            else "g:myGenIndex == 1
+                let cstemp = input("Add?", expand("%:p:h"), "file")
             endif
-            let db = g:myGenCSCOPE_DB . cstemp
-            redraw!
+            let db = g:myGenCSCOPE_DB . cstemp . '/'
             execute 'silent !mkdir -p ' . db
             execute 'cd ' . db
             while i < 15
@@ -503,23 +516,36 @@ function! RecCSCOPE()
             if(g:myGenIndex == 1)
                 let recursive = 0
             endif
-        elseif(g:myGenIndex == 4)
-            let cstemp = input("Delete?")
+            let recursive = 1
+            call UpdateCscopeShow()
+        elseif(g:myGenIndex == 0)
+            let currentDir = expand(getcwd())
+            let gentemp = input("Generate?", expand("%:p:h"), "file")
             redraw!
+            execute '!~/.nvim/gencs.sh ' . gentemp
+            call input("Enter to continue auto cs add")
+            let db = g:myGenCSCOPE_DB . gentemp . '/'
+            execute 'silent! cs add ' . db
+            redraw!
+            call UpdateCscopeShow()
+            let recursive = 1
+        elseif(g:myGenIndex == 2)
+            let cstemp = input("Delete?")
             if( cstemp != "" )
                 execute 'cs kill ' . cstemp
                 execute 'silent! cs reset'
             endif
-        elseif(g:myGenIndex == 5)
-            redraw!
+            call UpdateCscopeShow()
+        elseif(g:myGenIndex == 3)
             let recursive = 0
+            redraw!
         else
-            redraw!
             let recursive = 0
+            redraw!
         endif
     elseif(action == -1)
-        redraw!
         let recursive = 0
+        redraw!
     else
         redraw!
     endif
@@ -528,8 +554,9 @@ function! RecCSCOPE()
 endfunction
 
 function! ReloadCSCOPE()
+    redraw!
+    call UpdateCscopeShow()
     call MySwitchToWorkBuf()
-    execute "cs show"
     let myGenTagDir = expand(getcwd())
     let tmp = 1
     while tmp != 0
