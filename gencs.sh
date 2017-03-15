@@ -11,7 +11,7 @@ fi
 echo "CodeBase:$defaultCodeBaseName"
 echo "Folder:$genfolder"
 
-exgentype=`printf '\-name "*.c" "*.h" "Makefile*" "*.cpp"' | sed 's/" /" -or -name /g'`
+exgentype=`printf '\-name "*.c" "*.h" "Makefile*" "*.cpp" "*.py"' | sed 's/" /" -or -name /g'`
 
 CSCOPE_DIR=~/CSCOPE
 echo "--------Start Scanning---------"
