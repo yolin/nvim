@@ -109,7 +109,7 @@ set background=dark
 
 set autoread " auto read when file is changed from outside
 set history=50 " keep 50 lines of command line history
-"set mouse=a " mouse support
+set mouse=a " mouse support
 "if has("gui_running")
 "  if has("gui_gtk2")
 "    set guifont=Inconsolata\ 16
