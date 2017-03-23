@@ -300,7 +300,6 @@ vnoremap <c-v> "+p
 "vnoremap <c-c> "*y
 "vnoremap <c-v> "*p
 
-inoremap <c-z> <esc>ui
 inoremap <c-v> <esc>:set paste<cr>a<c-r>+<esc>:set nopaste<cr>
 
 "nnoremap <leader>u <ESC>:silent! !~/.nvim/gentag.sh <c-r>=getcwd()<cr> &<cr>
