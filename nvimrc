@@ -506,7 +506,7 @@ function! RecCSCOPE()
             let gentemp = input("Generate?", expand("%:p:h"), "file")
             redraw!
             execute '!~/.nvim/gencs.sh ' . gentemp
-            call input("Enter to continue auto cs add")
+            " call input("Enter to continue auto cs add")
             let db = g:myGenCSCOPE_DB . gentemp . '/'
             execute 'silent! cs add ' . db
             redraw!
