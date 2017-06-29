@@ -51,6 +51,8 @@ Plug 'svermeulen/vim-easyclip'
 "comment
 Plug 'tpope/vim-commentary'
 
+"python PEP8 check
+Plug 'nvie/vim-flake8'
 
 call plug#end()
 
@@ -220,7 +222,8 @@ noremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 noremap <F4> <esc>:set expandtab!<cr>
 noremap <F5> <esc>:Search <c-r>+<cr>
 noremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
-noremap <F7> <esc>:SignatureListBufferMark<cr>
+"F7 for vim-flake8 use
+"noremap <F7> <esc>:SignatureListBufferMark<cr>
 noremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 "noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
@@ -235,7 +238,8 @@ inoremap <xF3> <esc>:Ag "<c-r>+" <c-r>=getcwd()<cr>
 inoremap <F4> <esc>:set expandtab!<cr>
 inoremap <F5> <esc>:Search <c-r>+<cr>
 inoremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
-inoremap <F7> <esc>:SignatureListBufferMark<cr>
+"F7 for vim-flake8 use
+"inoremap <F7> <esc>:SignatureListBufferMark<cr>
 inoremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 "inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
