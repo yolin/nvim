@@ -191,9 +191,6 @@ set listchars=tab:\|\
 "a.vim
 let g:alternateSearchPath='sfr:./h,sfr:./include,sfr:./source,sfr:./src,sfr:./,sfr:./inc,sfr:../source,sfr:../src,sfr:../include,sfr:../inc'
 
-"autocomment
-autocmd FileType python setlocal commentstring=##\ %s
-
 "auto remove blank on line end
 "autocmd FileType c,cpp,java,php,perl,python,ruby,sh,html,htm autocmd BufWritePre  :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 "
