@@ -22,7 +22,7 @@ ln -s ~/.nvim/nvimrc $XDG_CONFIG_HOME/nvim/init.vim
 
 fix split window messed up when scrolling
 ==========================================
-Add declare -x COLORTERM="gnome-terminal" into ~/.bashrc
+echo 'declare -x COLORTERM="gnome-terminal"' >> ~/.bashrc
 
 install ag, very fast search
 ============================
@@ -30,4 +30,4 @@ apt install silversearcher-ag
 
 run vi and type
 ===============
-:BundleInstall  
+:PlugInstall  

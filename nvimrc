@@ -4,70 +4,52 @@
 ":%s/^/\=line('.').','/
 
 
-" Vundle
-set nocompatible " not compatible with the old-fashion vi mode
-filetype off " required!
-
-" http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
-" Setting up Vundle - the vim plugin bundler
-let iCanHazVundle=1
-let vundle_readme=expand('~/.nvim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-  echo "Installing Vundle.."
-  echo ""
-  silent !mkdir -p ~/.nvim/bundle
-  silent !git clone https://github.com/gmarik/vundle ~/.nvim/bundle/vundle
-  let iCanHazVundle=0
-endif
-
-set termguicolors
-set rtp+=~/.nvim/bundle/vundle
-call vundle#rc("~/.nvim/bundle")
-
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-
-" My Bundles here:
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.nvim/plugged')
 "
 " original repos on github
-Bundle 'MephistoMMM/molokai'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'airblade/vim-gitgutter'
+Plug 'MephistoMMM/molokai'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
 "Bundle 'Townk/vim-autoclose'
-Bundle 'scrooloose/nerdtree'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-fugitive'
-Bundle 'jlanzarotta/bufexplorer'
-Bundle 'vim-scripts/CRefVim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'ryanss/vim-hackernews'
-Bundle 'kdurant/LanguageRefVim'
-Bundle 'tpope/vim-surround'
-Bundle 'rking/ag.vim'
-Bundle 'justinmk/vim-syntax-extra'
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'vim-scripts/CRefVim'
+Plug 'pangloss/vim-javascript'
+Plug 'ryanss/vim-hackernews'
+Plug 'kdurant/LanguageRefVim'
+Plug 'tpope/vim-surround'
+Plug 'rking/ag.vim'
+Plug 'justinmk/vim-syntax-extra'
 
 "Note
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 
 "paste
-Bundle 'ConradIrwin/vim-bracketed-paste'
+Plug 'ConradIrwin/vim-bracketed-paste'
 
-Bundle 'kshenoy/vim-signature'
-Bundle 'Yggdroot/indentLine'
-Bundle 'vim-scripts/MultipleSearch'
-Bundle 'terryma/vim-multiple-cursors'
+Plug 'kshenoy/vim-signature'
+Plug 'Yggdroot/indentLine'
+Plug 'vim-scripts/MultipleSearch'
+Plug 'terryma/vim-multiple-cursors'
 
 "snip
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
 
 "yank
-Bundle 'tpope/vim-repeat'
-Bundle 'svermeulen/vim-easyclip'
+Plug 'tpope/vim-repeat'
+Plug 'svermeulen/vim-easyclip'
+call plug#end()
+
+set termguicolors
 
 let g:EasyClipUseCutDefaults = 0
 
