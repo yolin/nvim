@@ -47,6 +47,11 @@ Plug 'honza/vim-snippets'
 "yank
 Plug 'tpope/vim-repeat'
 Plug 'svermeulen/vim-easyclip'
+
+"comment
+Plug 'tpope/vim-commentary'
+
+
 call plug#end()
 
 set termguicolors
