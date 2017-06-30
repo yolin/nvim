@@ -12,8 +12,8 @@ call plug#begin('~/.nvim/plugged')
 " original repos on github
 Plug 'MephistoMMM/molokai'
 Plug 'Lokaltog/vim-easymotion'
-"Plug 'airblade/vim-gitgutter'
-Plug 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
+"Plug 'mhinz/vim-signify'
 "Bundle 'Townk/vim-autoclose'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
@@ -26,6 +26,11 @@ Plug 'kdurant/LanguageRefVim'
 Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
 Plug 'justinmk/vim-syntax-extra'
+
+"scroll
+Plug 'terryma/vim-smooth-scroll'
+
+Plug 'junegunn/limelight.vim'
 
 "Note
 Plug 'xolox/vim-misc'
@@ -72,6 +77,10 @@ let g:ag_prg="/usr/bin/ag --column"
 
 
 "
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 4)<CR>
 
 " set leader to ,
 "let mapleader=","
@@ -210,6 +219,7 @@ let NERDTreeWinPos="left"
 
 "mapping
 nnoremap <space><space> :noh<cr>:call MySwitchToWorkBuf()<cr>
+nnoremap <leader><space> <esc>:Limelight0.8<cr>
 
 nnoremap `<esc> :qa<cr>
 
@@ -608,6 +618,9 @@ function! MySwitchToWorkBuf()
     if(tempname == '') "SignatureBuffer
         execute "wincmd k"
     endif
+
+    execute "Limelight!"
+
     return 0
 endfunction
 command! -nargs=* -complete=file MySwitchToWorkBuf call MySwitchToWorkBuf()
