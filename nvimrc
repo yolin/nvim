@@ -12,7 +12,8 @@ call plug#begin('~/.nvim/plugged')
 " original repos on github
 Plug 'MephistoMMM/molokai'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 "Bundle 'Townk/vim-autoclose'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
@@ -53,6 +54,7 @@ Plug 'tpope/vim-commentary'
 
 "python PEP8 check
 Plug 'nvie/vim-flake8'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 call plug#end()
 
@@ -193,6 +195,7 @@ let g:alternateSearchPath='sfr:./h,sfr:./include,sfr:./source,sfr:./src,sfr:./,s
 
 "auto remove blank on line end
 "autocmd FileType c,cpp,java,php,perl,python,ruby,sh,html,htm autocmd BufWritePre  :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+"autocmd FileType python setlocal foldmethod=indent smartindent shiftwidth=4 ts=4 et cinwords=if,elif,else,for,while,try,except,finally,def,class
 "
 let g:EasyMotion_leader_key='f'
 
