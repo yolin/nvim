@@ -346,7 +346,8 @@ au BufRead *js.html set filetype=javascript noexpandtab
 au BufRead *css.htm set filetype=javascript noexpandtab
 au BufRead *css.html set filetype=javascript noexpandtab
 au BufRead *.in set syntax=kconfig
-au BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
+"au BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
+au BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab
 
 " add spell checking and automatic wrapping at the
 " recommended 72 columns to you commit messages
@@ -602,6 +603,11 @@ let g:myMenuIndex = 0
 function! MySwitchToWorkBuf()
 
     let tempname = bufname("%")
+
+    if(tempname =~# '.*_BASE_.*') || (tempname =~# '.*_LOCAL_.*') || (tempname =~# '.*_REMOTE_.*')
+        execute "wincmd j"
+        return 0
+    endif
 
     if( strlen(tempname) > 10 )
         let tempname = strpart(tempname,0,10)
