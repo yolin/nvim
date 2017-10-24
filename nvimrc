@@ -348,6 +348,7 @@ au BufRead *css.html set filetype=javascript noexpandtab
 au BufRead *.in set syntax=kconfig
 "au BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
 au BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab
+au BufRead *.shc set filetype=sh noexpandtab
 
 " add spell checking and automatic wrapping at the
 " recommended 72 columns to you commit messages
@@ -607,6 +608,9 @@ function! MySwitchToWorkBuf()
     if(tempname =~# '.*_BASE_.*') || (tempname =~# '.*_LOCAL_.*') || (tempname =~# '.*_REMOTE_.*')
         execute "wincmd j"
         return 0
+    endif
+    if(tempname =~# '.*fugitiveblame')
+        execute "wincmd l"
     endif
 
     if( strlen(tempname) > 10 )
