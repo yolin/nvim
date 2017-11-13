@@ -61,6 +61,8 @@ Plug 'tpope/vim-commentary'
 Plug 'nvie/vim-flake8'
 Plug 'Vimjas/vim-python-pep8-indent'
 
+Plug 'roxma/vim-paste-easy'
+
 call plug#end()
 
 set termguicolors
@@ -304,7 +306,7 @@ vnoremap <c-v> "+p
 "vnoremap <c-c> "*y
 "vnoremap <c-v> "*p
 
-inoremap <c-v> <esc>:set paste<cr>a<c-r>+<esc>:set nopaste<cr>
+inoremap <c-v> <c-r>+
 
 "nnoremap <leader>u <ESC>:silent! !~/.nvim/gentag.sh <c-r>=getcwd()<cr> &<cr>
 inoremap <c-s> <ESC>:update<cr>
