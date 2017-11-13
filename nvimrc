@@ -391,7 +391,7 @@ function! MyGetInput(start,end,idx)
     elseif gc=="\<left>" || nc == 'h'
         let tmp[1] = 4
     elseif gc == "\<backspace>"
-        let tmp[1] = 5
+        let tmp[1] = -1
     elseif nc == "i" || nc == 'a' || nc == "\r" || nc == "\n"
         let tmp[1] =  2
     elseif gc == "\<up>" || nc == 'k'
