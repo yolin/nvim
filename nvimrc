@@ -458,7 +458,7 @@ function! ShowMyGenTag()
     let startidx = 0
     let endidx = 4
     "let tmp = ['CS action:', ' 1) Add directly', ' 2) Show', ' 3) Add',' 4) Delete',' 5/q) Quit']
-    let tmp = [' 0) Gen', ' 1) Add',' 2) Delete',' q) Quit',' F12) Auto add']
+    let tmp = [' 0) Gen', ' 1) Add',' 2) Delete',' q or Backspace) Quit',' F12) Auto add']
     let csshow = system('cat ' . g:myCSCOPE_SHOW)
     let string = ''
     let i = 0
