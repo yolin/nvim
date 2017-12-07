@@ -99,6 +99,7 @@ set tabstop=4 " insert 2 spaces for a tab
 set expandtab " use space instead of tab
 set softtabstop=4
 set shiftwidth=4 " the number of space characters inserted for indentation
+set shell=sh
 
 "----------yolin molokai-----------
 colors molokai " vim color scheme
