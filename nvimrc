@@ -63,6 +63,8 @@ Plug 'Vimjas/vim-python-pep8-indent'
 
 Plug 'roxma/vim-paste-easy'
 
+Plug 'vimwiki/vimwiki'
+
 call plug#end()
 
 set termguicolors
@@ -133,9 +135,7 @@ set showmatch " Cursor shows matching ) and }
 set showmode " Show current mode
 " disable sound on errors
 "set noeb vb t_vb=
-
-
-
+"
 " status line {
 set laststatus=2
 set statusline=%<%F\ [%{&ff}]%h%m%r%y%=%-14.(%l,%c%V%)\ %P
@@ -153,6 +153,8 @@ highlight clear SignColumn " For the same appearance as your line number column
 "let g:tagbar_left=1
 
 " ------------------------------------------------yolin add --------------------------------------------
+set nocompatible
+
 filetype on
 filetype plugin on
 filetype indent on
