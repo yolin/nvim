@@ -19,7 +19,7 @@ for d in $genfolder
 do
     echo "Scanning... $d"
     mkdir -p $CSCOPE_DIR/$d
-    eval "find $d -type f \\( ! -path '*/.*' \\) -and \\( $exgentype \\) > $CSCOPE_DIR/$d/cscope.files"
+    eval "find $d -type f \\( ! -path '$d/.*' \\) -and \\( $exgentype \\) > $CSCOPE_DIR/$d/cscope.files"
     sed -i -e 's/^/"/g' $CSCOPE_DIR/$d/cscope.files
     sed -i -e 's/$/"/g' $CSCOPE_DIR/$d/cscope.files
     cscope -bkq -i $CSCOPE_DIR/$d/cscope.files -f $CSCOPE_DIR/$d/cscope.out
