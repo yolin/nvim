@@ -10,7 +10,7 @@
 call plug#begin('~/.nvim/plugged')
 "
 " original repos on github
-Plug 'MephistoMMM/molokai'
+Plug 'tomasr/molokai'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 "Plug 'mhinz/vim-signify'
@@ -21,7 +21,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/CRefVim'
 Plug 'pangloss/vim-javascript'
-Plug 'ryanss/vim-hackernews'
+"Plug 'ryanss/vim-hackernews'
 Plug 'kdurant/LanguageRefVim'
 Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
@@ -67,7 +67,9 @@ Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
-set termguicolors
+let g:molokai_original = 1
+let g:rehash256 = 1
+"set termguicolors
 
 let g:EasyClipUseCutDefaults = 0
 
