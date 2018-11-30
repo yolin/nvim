@@ -65,7 +65,13 @@ Plug 'roxma/vim-paste-easy'
 
 Plug 'vimwiki/vimwiki'
 
+Plug 'JamshedVesuna/vim-markdown-preview'
+
 call plug#end()
+
+
+"vim-markdown-preview, need install grip(pip install grip), and apt install xdotool
+let vim_markdown_preview_github=1
 
 let g:molokai_original = 1
 let g:rehash256 = 1
