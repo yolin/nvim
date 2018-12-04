@@ -200,9 +200,17 @@ set autochdir
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git anyway...
-set nobackup
-set nowb
-set noswapfile
+" set nobackup
+" set nowb
+" set noswapfile
+
+set backupdir=~/CSCOPE/.vimtmp
+set directory=~/CSCOPE/.vimtmp
+set undofile
+set undodir=~/CSCOPE/.vimtmp
+set undolevels=1000
+set undoreload=10000
+
 "set lbr
 set tw=500
 set wrap "Wrap lines
