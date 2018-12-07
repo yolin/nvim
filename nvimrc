@@ -202,7 +202,7 @@ set autochdir
 " Turn backup off, since most stuff is in SVN, git anyway...
 " set nobackup
 " set nowb
-" set noswapfile
+set noswapfile
 
 set backupdir=~/CSCOPE/.vimtmp
 set directory=~/CSCOPE/.vimtmp
