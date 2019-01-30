@@ -2,6 +2,7 @@
 " fist number
 ":let i=0|g/^/s//\=i.','/ |let i+=1
 ":%s/^/\=line('.').','/
+":%!python -m json.tool
 
 
 " Specify a directory for plugins
