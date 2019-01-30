@@ -361,6 +361,7 @@ au BufRead Makefile* set filetype=make noexpandtab
 au BufRead *.in set noexpandtab
 au BufRead *.conf set noexpandtab
 au FileType hog setlocal commentstring=#\ %s
+au BufRead product_config.make setlocal commentstring=#\ %s\ is\ not\ set
 au BufRead *.htm set filetype=javascript noexpandtab
 au BufRead *.html set filetype=javascript noexpandtab
 au BufRead *.cgi set filetype=javascript noexpandtab
