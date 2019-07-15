@@ -11,7 +11,8 @@
 call plug#begin('~/.nvim/plugged')
 "
 " original repos on github
-Plug 'tomasr/molokai'
+"Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 "Plug 'mhinz/vim-signify'
@@ -74,8 +75,8 @@ call plug#end()
 "vim-markdown-preview, need install grip(pip install grip), and apt install xdotool
 let vim_markdown_preview_github=1
 
-let g:molokai_original = 1
-let g:rehash256 = 1
+"let g:molokai_original = 1
+"let g:rehash256 = 1
 "set termguicolors
 
 let g:EasyClipUseCutDefaults = 0
@@ -113,7 +114,8 @@ set shiftwidth=4 " the number of space characters inserted for indentation
 set shell=sh
 
 "----------yolin molokai-----------
-colors molokai " vim color scheme
+colors gruvbox " vim color scheme
+let g:gruvbox_contrast_dark = 'hard'
 "-------------- yolin end---------------
 
 "----------yolin papaercolor-----------
