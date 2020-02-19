@@ -32,7 +32,8 @@ apt install silversearcher-ag
 
 install nodejs, for coc plugin
 ============================
-curl -sL install-node.now.sh/lts | bash
+curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 run vi and type
 ===============
