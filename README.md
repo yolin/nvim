@@ -29,6 +29,11 @@ install ag, very fast search
 ============================
 apt install silversearcher-ag  
 
+
+install nodejs, for coc plugin
+============================
+curl -sL install-node.now.sh/lts | bash
+
 run vi and type
 ===============
 :PlugInstall  
