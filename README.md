@@ -1,5 +1,7 @@
 install neovim
 ===============
+sudo apt-get install software-properties-common
+
 echo | sudo add-apt-repository ppa:neovim-ppa/stable  
 sudo apt-get update  
 echo Y | sudo apt-get install neovim  
