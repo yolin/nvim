@@ -47,9 +47,9 @@ Plug 'vim-scripts/MultipleSearch'
 Plug 'terryma/vim-multiple-cursors'
 
 "snip
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+"Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
+"Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 
 "yank
