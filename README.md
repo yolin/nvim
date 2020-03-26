@@ -40,3 +40,5 @@ sudo apt-get install -y nodejs
 run vi and type
 ===============
 :PlugInstall  
+exit run vi again  
+:CocInstall coc-snippets  
