@@ -41,4 +41,4 @@ run vi and type
 ===============
 :PlugInstall  
 exit run vi again  
-:CocInstall coc-snippets  
+:CocInstall coc-snippets coc-css coc-json coc-bookmark
