@@ -41,7 +41,8 @@ Plug 'xolox/vim-notes'
 "paste
 Plug 'ConradIrwin/vim-bracketed-paste'
 
-Plug 'kshenoy/vim-signature'
+" Plug 'kshenoy/vim-signature'
+Plug 'MattesGroeger/vim-bookmarks'
 Plug 'Yggdroot/indentLine'
 Plug 'vim-scripts/MultipleSearch'
 Plug 'terryma/vim-multiple-cursors'
@@ -60,8 +61,8 @@ Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-commentary'
 
 "python PEP8 check
-Plug 'nvie/vim-flake8'
-Plug 'Vimjas/vim-python-pep8-indent'
+" Plug 'nvie/vim-flake8'
+" Plug 'Vimjas/vim-python-pep8-indent'
 
 Plug 'roxma/vim-paste-easy'
 
@@ -401,7 +402,7 @@ noremap <F4> <esc>:set expandtab!<cr>
 noremap <F5> <esc>:Search <c-r>+<cr>
 noremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
 "F7 for vim-flake8 use
-"noremap <F7> <esc>:SignatureListBufferMark<cr>
+noremap <F7> <esc>:BookmarkShowAll<cr>
 noremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 "noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
@@ -417,7 +418,7 @@ inoremap <F4> <esc>:set expandtab!<cr>
 inoremap <F5> <esc>:Search <c-r>+<cr>
 inoremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
 "F7 for vim-flake8 use
-"inoremap <F7> <esc>:SignatureListBufferMark<cr>
+inoremap <F7> <esc>:BookmarkShowAll<cr>
 inoremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 "inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
 inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
@@ -430,8 +431,11 @@ vnoremap <xF3> y<esc>:Ag "<c-r>0" <c-r>=getcwd()<cr>
 noremap <c-j> :GitGutterNextHunk<cr>
 noremap <c-k> :GitGutterPrevHunk<cr>
 
-noremap <m-j> ]`
-noremap <m-k> [`
+noremap <c-h> :BookmarkNext<cr>
+noremap <c-l> :BookmarkPrev<cr>
+
+" noremap <m-j> ]`
+" noremap <m-k> [`
 
 noremap <c-xDown> <c-w>j
 noremap <c-xUp> <c-w>k
