@@ -319,7 +319,7 @@ syntax on
 set ruler
 set tags=tags;
 set write
-set cmdheight=2
+set cmdheight=1
 "set t_Co=256
 set backspace=2
 set ls=2
