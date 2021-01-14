@@ -758,7 +758,7 @@ if has("cscope")
     "nmap <LEADER>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 endif
-
+let g:snipMate = { 'snippet_version' : 1 }
 let g:notes_directories = ['~/Documents/Notes']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " global variable
