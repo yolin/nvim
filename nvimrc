@@ -466,6 +466,9 @@ noremap <leader>ll <c-w>l
 "inoremap <m-xLeft> <esc>:tabprevious<cr>
 "inoremap <m-xRight> <esc>:tabnext<cr>
 
+noremap <a-k> <esc>:bp<cr>
+noremap <a-j> <esc>:bn<cr>
+
 noremap <m-xUp> <esc>:bp<cr>
 noremap <m-xDown> <esc>:bn<cr>
 noremap <m-xLeft> <esc>:vertical res -3<cr>
