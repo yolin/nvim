@@ -70,7 +70,7 @@ Plug 'vimwiki/vimwiki'
 
 Plug 'JamshedVesuna/vim-markdown-preview'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim'
 
 " If you don't have nodejs and yarn
 " use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
