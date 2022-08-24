@@ -13,11 +13,6 @@ echo | sudo update-alternatives --config vim
 sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60  
 echo | sudo update-alternatives --config editor  
 
-Install nodjs 14
-================
-curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -  
-sudo apt-get install -y nodejs  
-
 fix clipboard
 ==============
 apt install xsel  
@@ -39,7 +34,7 @@ apt install silversearcher-ag
 
 install nodejs, for coc plugin
 ============================
-curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -  
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -  
 sudo apt-get install -y nodejs yarn
 
 run vi and type
