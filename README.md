@@ -39,8 +39,7 @@ sudo apt-get install -y nodejs yarn
 
 run vi and type
 ===============
-:source %  
 :PlugInstall  
-:call mkdp#util#install()
+:call mkdp#util#install()  
 exit run vi again  
-:CocInstall coc-snippets coc-css coc-json
+:CocInstall coc-snippets coc-css coc-json  
