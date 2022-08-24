@@ -59,8 +59,8 @@ ln -s ~/.nvim $XDG_CONFIG_HOME/nvim
 ln -s ~/.nvim/nvimrc $XDG_CONFIG_HOME/nvim/init.vim  
 vi  
 :PlugInstall  
-# if got error, type enter  
-# if got retry, type R  
+// if got error, type enter  
+// if got retry, type R  
 exit vi  
 vi again  
 :call mkdp#util#install()  
