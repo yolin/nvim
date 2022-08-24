@@ -48,6 +48,8 @@ exit run vi again
 
 Troubleshotting
 ===============
+sudo apt-get update  
+echo Y | sudo apt-get install neovim  
 cd ~/.nvim/
 git fetch
 git reset --hard origin/master  
