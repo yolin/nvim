@@ -39,7 +39,7 @@ sudo apt-get install -y nodejs yarn
 
 run vi and type
 ===============
-:source %
+:source %  
 :PlugInstall  
 :call mkdp#util#install()
 exit run vi again  
