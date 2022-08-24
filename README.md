@@ -43,3 +43,26 @@ run vi and type
 :call mkdp#util#install()  
 exit run vi again  
 :CocInstall coc-snippets coc-css coc-json  
+
+
+
+Troubleshotting
+===============
+cd ~/.nvim/
+git fetch
+git reset --hard origin/master  
+git clen -f -f -x
+mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}  
+ln -s ~/.nvim $XDG_CONFIG_HOME/nvim  
+ln -s ~/.nvim/nvimrc $XDG_CONFIG_HOME/nvim/init.vim  
+vi  
+:PlugInstall  
+# if got error, type enter  
+# if got retry, type R  
+exit vi  
+vi again  
+:call mkdp#util#install()  
+:CocInstall coc-snippets coc-css coc-json  
+exit vi
+finished  
+
