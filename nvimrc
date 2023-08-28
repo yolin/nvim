@@ -548,7 +548,7 @@ au BufWinEnter \[Buf\ List\] setl nonumber
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 "
 let g:myGenCSCOPE_DB = "~/CSCOPE/"
-let g:myCSCOPE_SHOW = "/tmp/cscope_show.txt"
+let g:myCSCOPE_SHOW = "~/CSCOPE/cscope_show.txt"
 let g:myGenIndex = 1
 
 function! ReloadAllCSCOPE(var)
