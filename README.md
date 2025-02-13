@@ -47,13 +47,13 @@ apt install silversearcher-ag
 install nodejs, for coc plugin
 ============================
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -  
+sudo apt-get install -y nodejs yarn  
 
 ```
-tip: other method to install nodejs
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-nvm install 22
+tip: other method to install nodejs  
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash  
+nvm install 22  
 ```
-sudo apt-get install -y nodejs yarn
 pip install pynvim  
 
 run vi and type
