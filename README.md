@@ -8,7 +8,7 @@ echo Y | sudo apt-get install neovim
 
 ```
 tip
-use snap to install v0.8  
+use snap to install v0.10  
 snap install nvim --classic
 ```
 
