@@ -6,6 +6,12 @@ echo | sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt-get update  
 echo Y | sudo apt-get install neovim  
 
+```
+tip
+use snap to install v0.8  
+snap install nvim --classic
+```
+
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60  
 echo | sudo update-alternatives --config vi  
 sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60  
