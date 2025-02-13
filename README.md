@@ -2,21 +2,27 @@ install neovim
 ===============
 sudo apt-get install software-properties-common
 
+``` old
 echo | sudo add-apt-repository ppa:neovim-ppa/stable  
 sudo apt-get update  
-echo Y | sudo apt-get install neovim  
-
-```
-tip
-use snap to install v0.10  
-snap install nvim --classic
-```
+echo Y | sudo apt-get install neovim
 
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60  
 echo | sudo update-alternatives --config vi  
 sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60  
 echo | sudo update-alternatives --config vim  
 sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60  
+echo | sudo update-alternatives --config editor  
+```
+
+use snap to install v0.10  
+snap install nvim --classic
+
+sudo update-alternatives --install /usr/bin/vi vi /snap/nvim/current/usr/bin/nvim 60  
+echo | sudo update-alternatives --config vi  
+sudo update-alternatives --install /usr/bin/vim vim /snap/nvim/current/usr/bin/nvim 60  
+echo | sudo update-alternatives --config vim  
+sudo update-alternatives --install /usr/bin/editor editor /snap/nvim/current/usr/bin/nvim 60  
 echo | sudo update-alternatives --config editor  
 
 fix clipboard
@@ -41,7 +47,14 @@ apt install silversearcher-ag
 install nodejs, for coc plugin
 ============================
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -  
+
+```
+tip: other method to install nodejs
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+nvm install 22
+```
 sudo apt-get install -y nodejs yarn
+pip install pynvim  
 
 run vi and type
 ===============
