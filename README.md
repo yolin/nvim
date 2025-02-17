@@ -68,3 +68,7 @@ vi again
 exit vi
 finished  
 
+clangd  
+===============
+:CocInstall coc-clangd  
+

@@ -82,6 +82,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
+Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 "coc config
@@ -413,8 +414,8 @@ noremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
 noremap <F7> <esc>:BookmarkShowAll<cr>
 noremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 "noremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
-noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
-noremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
+"noremap <F10> <esc>:call ReloadAllCSCOPE("ISD2")<cr>
+"noremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
 noremap <F12> <esc>:call ReloadCSCOPE()<cr>
 
 
@@ -429,8 +430,8 @@ inoremap <F6> <esc>:SearchReinit<cr>:SearchReset<cr>
 inoremap <F7> <esc>:BookmarkShowAll<cr>
 inoremap <F8> <esc>:call MySwitchToWorkBuf()<cr>:BufExplorer<cr>
 "inoremap <F9> <esc>:!~/.nvim/gencs.sh <c-r>=getcwd()<cr>
-inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
-inoremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
+"inoremap <F10> <esc>:call ReloadAllCSCOPE("ISD2"")<cr>
+"inoremap <F11> <esc>:call ReloadAllCSCOPE("SmartOpenWrt")<cr>
 inoremap <F12> <esc>:call ReloadCSCOPE()<cr>
 
 vnoremap <F5> y<esc>:Search <c-r>0<cr>
@@ -545,7 +546,7 @@ au BufWinEnter \[Buf\ List\] setl nonumber
 "au VimEnter * NERDTreeFind
 "
 "au BufWritePost *.c,*.cpp,*.h silent! !cscope -bkq -i /CSCOPE/ISD2/MIPS32_APPS/sysconfig/cscope.files -f /CSCOPE/ISD2/MIPS32_APPS/sysconfig/cscope.out &
-set cscopequickfix=s-,c-,d-,i-,t-,e-
+"set cscopequickfix=s-,c-,d-,i-,t-,e-
 "
 let g:myGenCSCOPE_DB = "~/CSCOPE/"
 let g:myCSCOPE_SHOW = "~/CSCOPE/cscope_show.txt"
@@ -691,6 +692,7 @@ function! RecCSCOPE()
             endif
             let db = g:myGenCSCOPE_DB . cstemp . '/'
             execute 'silent !mkdir -p ' . db
+            execute 'slient !touch ' . db . 'compile_commands.json'
             execute 'cd ' . db
             while i < 15
                 if filereadable(expand(db . "cscope.out"))
