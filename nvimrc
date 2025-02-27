@@ -375,7 +375,7 @@ set wrap "Wrap lines
 set list
 set winaltkeys=no
 
-set listchars=tab:\|\ 
+set listchars=t ,aqqab:\|\ 
 
 "a.vim
 let g:alternateSearchPath='sfr:./h,sfr:./include,sfr:./source,sfr:./src,sfr:./,sfr:./inc,sfr:../source,sfr:../src,sfr:../include,sfr:../inc'
