@@ -24,3 +24,17 @@ vim.o.shiftwidth = 4
 
 vim.keymap.set("n", "<C-j>", ":Gitsigns next_hunk<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-k>", ":Gitsigns prev_hunk<CR>", { noremap = true, silent = true })
+
+vim.keymap.set('n', '<Leader>s', ':Cs find s <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>:wincmd j<CR>', { noremap = true, silent = true })
+
+-- 使用 Ctrl-\ 查找 symbol 並顯示 quickfix，下移一個視窗
+vim.keymap.set('n', '<C-\\>', ':Cs find s <C-R>=expand("<cword>")<CR><CR>:botright cwindow<CR>:wincmd j<CR>', { noremap = true, silent = true })
+
+-- 使用 <Leader>g 查找 global 定義
+vim.keymap.set('n', '<Leader>g', ':Cs find g <C-R>=expand("<cword>")<CR><CR>', { noremap = true, silent = true })
+
+-- 使用 Ctrl-] 查找 global 定義（和 ctags 預設行為一致）
+vim.keymap.set('n', '<C-]>', ':Cs find g <C-R>=expand("<cword>")<CR><CR>', { noremap = true, silent = true })
+
+-- 使用 <Leader>f 查找檔案
+vim.keymap.set('n', '<Leader>f', ':Cs find f <C-R>=expand("<cfile>")<CR><CR>', { noremap = true, silent = true })
