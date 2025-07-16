@@ -223,7 +223,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 "
-
+let g:coc_disable_startup_warning = 1
 
 "vim-markdown-preview, need install grip(pip install grip), and apt install xdotool
 let vim_markdown_preview_github=1
