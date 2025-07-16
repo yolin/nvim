@@ -80,7 +80,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
 " If you have nodejs and yarn
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'branch': 'master', 'do': 'cd app && yarn install' }
 
 call plug#end()
 
