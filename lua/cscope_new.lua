@@ -1,17 +1,20 @@
 local M = {}
 
-local M = {}
-
 local fn = vim.fn
+local uv = vim.loop
 local cmd = vim.cmd
 
-vim.g.CscopeGenDBRoot = fn.expand("~/CSCOPE/")
-vim.g.CscopeShowFile = fn.expand("~/CSCOPE/cscope_show.txt")
-vim.g.CscopeGenIndex = 1
+-- 設定 CSCOPE 跟目錄
+local cscope_base_dir = uv.fs_realpath(fn.expand("~/CSCOPE/")) or fn.expand("~/CSCOPE")
+if not fn.isdirectory(cscope_base_dir) then
+  fn.mkdir(cscope_base_dir, "p")
+end
 
--- 更新 Cscope DB 顯示
+local cscope_show_file = cscope_base_dir .. "/cscope_show.txt"
+
+-- 更新 cscope db 顯示
 local function update_cscope_show()
-  cmd("redir! > " .. vim.g.CscopeShowFile)
+  cmd("redir! > " .. cscope_show_file)
   cmd("silent Cscope db show")
   cmd("redir END")
   cmd("redraw!")
@@ -27,76 +30,90 @@ local function switch_to_work_buf()
   end
 end
 
--- 遞迴處理選單動作
+-- 取得乾淨子資料夾名（用最後一層資料夾）
+local function get_subdir_name(path)
+  local abs = uv.fs_realpath(fn.expand(path)) or fn.expand(path)
+  return fn.fnamemodify(abs, ":t")
+end
+
+-- 處理選單動作
 local function process_action(action)
-  if action == nil or action == -1 then
+  local current_dir = uv.fs_realpath(fn.getcwd())
+
+  if action == -1 or action == 3 then
     cmd("redraw!")
     return
   end
 
-  local current_dir = fn.getcwd()
-  local i = 1
+  -- Add
+  if action == 1 or action == 4 or action == -12 then
+    local input_path = (action == 4 or action == -12)
+      and current_dir
+      or fn.input("Add?", fn.expand("%:p:h"), "file")
 
-  if action == 2 or action == 5 or action == -12 then
-    if vim.g.CscopeGenIndex == 1 or vim.g.CscopeGenIndex == 4 or action == -12 then
-      local path = (vim.g.CscopeGenIndex == 4 or action == -12)
-        and current_dir
-        or fn.input("Add?", fn.expand("%:p:h"), "file")
+    local abs_target = uv.fs_realpath(fn.expand(input_path)) or fn.expand(input_path)
+    local db_path = cscope_base_dir .. "/" .. abs_target
 
-      local db_path = vim.g.CscopeGenDBRoot .. path .. "/"
-      fn.system("mkdir -p " .. db_path)
-      fn.system("touch " .. db_path .. "compile_commands.json")
-      fn.chdir(db_path)
+    fn.system("mkdir -p " .. db_path)
+    fn.system("touch " .. db_path .. "/compile_commands.json")
 
-      while i < 15 do
-        if fn.filereadable(db_path .. "cscope.out") == 1 then
-          cmd("silent! Cscope db add " .. db_path)
-          break
-        else
-          db_path = db_path .. "/../"
-          fn.chdir("..")
-          i = i + 1
-        end
+    local found = false
+    local search_path = db_path
+    for _ = 1, 10 do
+      if fn.filereadable(search_path .. "/cscope.out") == 1 then
+        cmd("silent! Cscope db add " .. search_path)
+        found = true
+        break
       end
+      local parent = fn.fnamemodify(search_path, ":h")
+      if parent == search_path then break end
+      search_path = parent
+    end
 
-      fn.chdir(current_dir)
-      update_cscope_show()
-      M.ReloadCscope() -- 再次呼叫
+    if not found then
+      vim.notify("未找到 cscope.out，無法新增資料庫", vim.log.levels.WARN)
+    end
 
-    elseif vim.g.CscopeGenIndex == 0 then
-      local gentemp = fn.input("Generate?", fn.expand("%:p:h"), "file")
-      -- fn.system("~/.nvim/gencs.sh " .. gentemp)
-      local script = fn.expand("~/.nvim/gencs.sh")
-      if fn.filereadable(script) == 1 then
-        fn.system(script .. " " .. gentemp)
-      else
+    update_cscope_show()
+    M.ReloadCscope()
+
+  -- Gen
+  elseif action == 0 then
+    local gentemp = fn.input("Generate?", fn.expand("%:p:h"), "file")
+    local abs_path = uv.fs_realpath(fn.expand(gentemp)) or fn.expand(gentemp)
+    local script = uv.fs_realpath(fn.expand("~/.nvim/gencs.sh")) or fn.expand("~/.nvim/gencs.sh")
+
+    if fn.filereadable(script) == 0 then
       vim.notify("找不到 gencs.sh 腳本: " .. script, vim.log.levels.ERROR)
-        end
-      local db = vim.g.CscopeGenDBRoot .. gentemp .. "/"
-      cmd("silent! Cscope db add " .. db)
-      update_cscope_show()
-      M.ReloadCscope()
-
-    elseif vim.g.CscopeGenIndex == 2 then
-      local name = fn.input("Delete?")
-      if name ~= "" then
-        cmd("Cscope kill " .. name)
-        cmd("silent! Cscope reset")
-      end
-      update_cscope_show()
-      M.ReloadCscope()
-
-    elseif vim.g.CscopeGenIndex == 3 then
-      cmd("redraw!")
       return
     end
-  else
-    cmd("redraw!")
-    return
+
+    fn.system(script .. " " .. abs_path)
+
+    local db_path = cscope_base_dir .. "/" .. abs_path
+
+    if fn.filereadable(db_path .. "/cscope.out") == 1 then
+      cmd("silent! Cscope db add " .. db_path)
+    else
+      vim.notify("找不到 cscope.out 檔案於：" .. db_path, vim.log.levels.ERROR)
+    end
+
+    update_cscope_show()
+    M.ReloadCscope()
+
+  -- Delete
+  elseif action == 2 then
+    local name = fn.input("Delete?")
+    if name ~= "" then
+      cmd("Cscope kill " .. name)
+      cmd("silent! Cscope reset")
+    end
+    update_cscope_show()
+    M.ReloadCscope()
   end
 end
 
--- 顯示選單並處理
+-- 顯示選單
 local function show_menu()
   local options = {
     { label = "0) Gen", value = 0 },
@@ -106,21 +123,16 @@ local function show_menu()
     { label = "F12) Auto add", value = -12 },
   }
 
-  local db_info = fn.system("cat " .. vim.g.CscopeShowFile)
+  local db_info = fn.system("cat " .. cscope_show_file)
   print("Cscope DBs:\n" .. db_info .. "-----------")
 
   vim.ui.select(options, {
     prompt = "Select Cscope Action:",
     format_item = function(item)
-      return ((vim.g.CscopeGenIndex == item.value) and "> " or "  ") .. item.label
+      return "  " .. item.label
     end,
   }, function(choice)
-    if choice then
-      vim.g.CscopeGenIndex = choice.value
-      process_action(choice.value)
-    else
-      process_action(-1)
-    end
+    process_action(choice and choice.value or -1)
   end)
 end
 
@@ -132,7 +144,7 @@ function M.ReloadCscope()
   show_menu()
 end
 
--- 綁定快捷鍵
+-- 快捷鍵
 vim.keymap.set("n", "<F12>", M.ReloadCscope, { noremap = true, silent = true })
 
 return M
